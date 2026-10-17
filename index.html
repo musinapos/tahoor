@@ -21,10 +21,16 @@ nav a{color:#fff;text-decoration:none}
 .search input{flex:1;border:none;outline:none;padding:12px 15px;font-size:15px;border-radius:30px}
 .search button{background:var(--orange);color:#fff;border:none;padding:10px 22px;border-radius:20px;font-weight:bold;cursor:pointer}
 .meta{font-size:12px;margin-top:10px;color:#555}
-.categories{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:20px}
-.cat{padding:12px 18px;border-radius:12px;border:1.5px solid #ddd;cursor:pointer;font-weight:bold;background:#fff}
-.cat.active{background:var(--orange);color:#fff;border-color:var(--orange)}
-.cat.blue{background:var(--blue);color:#fff;border-color:var(--blue)}
+.categories{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;padding:22px 15px}
+.cat{padding:14px 22px;border-radius:30px;border:none;cursor:pointer;font-weight:800;font-size:14px;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15);transition:all .2s ease;display:flex;align-items:center;gap:8px}
+.cat:active{transform:scale(.95)}
+.cat.active{transform:scale(1.05);box-shadow:0 6px 18px rgba(0,0,0,.25);outline:3px solid #fff;outline-offset:2px}
+.cat.food{background:linear-gradient(135deg,#FF6B00,#FF8A3D)}
+.cat.truck{background:linear-gradient(135deg,#0A4A8C,#1E6FC1)}
+.cat.retail{background:linear-gradient(135deg,#EC4899,#F472B6)}
+.cat.services{background:linear-gradient(135deg,#0F766E,#14B8A6)}
+.cat.book{background:linear-gradient(135deg,#6C2BD9,#9B5CFF)}
+.cat.blue{background:var(--blue);color:#fff}
 .section{max-width:1100px;margin:auto;padding:10px 15px 30px}
 .section h2{text-align:center;color:var(--dark);font-size:24px;margin:10px 0}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:20px}
@@ -32,10 +38,12 @@ nav a{color:#fff;text-decoration:none}
 .card img{width:100%;height:170px;object-fit:cover}
 .card-body{padding:15px}
 .badge{display:inline-block;background:var(--orange);color:#fff;font-size:11px;padding:4px 8px;border-radius:6px;margin-bottom:8px}
+.badge.book{background:#6C2BD9}
 .card h3{font-size:18px;color:var(--dark)}
 .stars{color:#FFA500;font-size:13px;margin:5px 0}
 .card p{font-size:13px;color:#555;line-height:1.5}
-.btn{display:block;text-align:center;margin-top:12px;border:1.5px solid var(--blue);color:var(--blue);padding:8px;border-radius:8px;font-weight:bold;text-decoration:none}
+.btn{display:block;text-align:center;margin-top:12px;border:1.5px solid var(--blue);color:var(--blue);padding:8px;border-radius:8px;font-weight:bold;text-decoration:none;cursor:pointer}
+.btn.book{border-color:#6C2BD9;color:#6C2BD9}
 .pricing{background:#FFEADF;padding:35px 15px;text-align:center}
 .pricing h2{color:var(--dark);font-size:26px}
 .pricing-grid{max-width:1000px;margin:20px auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
@@ -50,9 +58,20 @@ nav a{color:#fff;text-decoration:none}
 .form-wrap button{background:var(--orange);color:#fff;border:none;padding:13px;width:100%;border-radius:10px;font-weight:bold;font-size:16px}
 footer{background:var(--dark);color:#fff;padding:25px 15px;text-align:center;font-size:13px;line-height:1.7}
 footer a{color:#FFD9B0;text-decoration:none}
-/* ADDED ONLY FOR YOUR 3 PICTURES - DIVIDED AND FITTED */
 .gallery{display:flex;gap:5px;padding:5px 5px 0}
 .gallery img{width:50%;height:90px;object-fit:cover;border-radius:8px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;z-index:999;overflow-y:auto;padding:15px}
+.modal.open{display:block}
+.modal-inner{max-width:700px;margin:20px auto;background:#fff;border-radius:20px;overflow:hidden}
+.modal-head{background:#6C2BD9;color:#fff;padding:20px;text-align:center}
+.modal-head h2{font-size:22px}
+.modal-head p{font-size:13px;opacity:.9;margin-top:5px}
+.book-page{padding:20px;border-bottom:1px solid #eee}
+.book-page h3{color:#6C2BD9;margin-bottom:8px}
+.book-page p{font-size:15px;line-height:1.6;color:#333}
+.book-page img{width:100%;border-radius:12px;margin-bottom:10px;max-height:320px;object-fit:cover}
+.close-btn{background:#fff;color:#6C2BD9;border:none;padding:10px 18px;border-radius:20px;font-weight:bold;cursor:pointer;margin-top:10px}
+.wa-btn{display:block;background:#25D366;color:#fff;text-align:center;padding:13px;border-radius:12px;font-weight:bold;text-decoration:none;margin:15px 20px 20px}
 </style>
 </head>
 <body>
@@ -76,15 +95,49 @@ footer a{color:#FFD9B0;text-decoration:none}
 </div>
 
 <div class="categories" id="businesses">
-  <div class="cat active" onclick="setCat('all',this)">🍔 Food</div>
-  <div class="cat blue" onclick="setCat('truck',this)">🚚 Truck Stop</div>
-  <div class="cat" onclick="setCat('retail',this)">🛍️ Retail</div>
-  <div class="cat" onclick="setCat('services',this)">🔧 Services</div>
+  <div class="cat food active" onclick="setCat('all',this)">🍔 Food</div>
+  <div class="cat retail" onclick="setCat('retail',this)">🛍️ Retail</div>
+  <div class="cat services" onclick="setCat('services',this)">🔧 Services</div>
+  <div class="cat book" onclick="setCat('bookstore',this)">📚 TAHOR Kids Bookstore</div>
 </div>
 
 <div class="section">
   <h2>Featured Businesses</h2>
   <div class="grid" id="businessGrid"></div>
+</div>
+
+<div id="bookModal" class="modal">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h2>📚 TAHOR Kids Bookstore</h2>
+      <p>Inside TAHOR • For Kids in Musina & Everywhere</p>
+      <button class="close-btn" onclick="closeBookstore()">✕ Close Store</button>
+    </div>
+    <div class="book-page">
+      <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&q=80" alt="TAHOR Book Cover">
+      <h3>TAHOR Kids Book - Passion Over Laziness</h3>
+      <p><b>By TAHOR Kids • Age 5-10 • English</b><br>Passion is doing what you love, even when it's hard. Laziness is waiting for tomorrow. This book teaches kids to choose passion every day.</p>
+      <p><b>Price: FREE for Testing</b> • Later: R50 PDF / R150 Printed</p>
+    </div>
+    <div class="book-page">
+      <h3>Page 1 - Meet TAHOR</h3>
+      <p>TAHOR is a bright, happy kid in Musina. He loves reading, running and helping his mom. He wakes up early and says: "Today I will do my best!"</p>
+    </div>
+    <div class="book-page">
+      <h3>Page 2 - Passion vs Laziness</h3>
+      <p>One day, Laziness says: "Sleep more, don't read." Passion says: "Get up, let's learn, let's grow!" TAHOR chooses Passion.</p>
+    </div>
+    <div class="book-page">
+      <h3>Page 3 - TAHOR Tries Hard</h3>
+      <p>TAHOR reads one page, then two, then a whole book! He helps his friends. He feels proud because he did not give up.</p>
+    </div>
+    <div class="book-page">
+      <h3>Page 4 - Passion Wins</h3>
+      <p>When you choose passion, you grow big and strong. Laziness makes you small. TAHOR says: "Passion over laziness, always!"</p>
+      <p style="margin-top:10px;color:#6C2BD9;font-weight:bold">Page 5 - Testing Only - No picture needed yet, we are just testing.</p>
+    </div>
+    <a class="wa-btn" href="https://wa.me/27799073779?text=Hi%20TAHOR%20Kids%20Bookstore!%20I%20want%20Passion%20Over%20Laziness" target="_blank">📱 Order on WhatsApp</a>
+  </div>
 </div>
 
 <div class="pricing" id="pricing">
@@ -118,7 +171,7 @@ footer a{color:#FFD9B0;text-decoration:none}
   <div class="form-wrap">
     <h2 style="color:var(--dark)">ADD YOUR BUSINESS IN THE POT</h2>
     <input id="bName" placeholder="Business Name e.g. Ele's Fast Food">
-    <select id="bCat"><option value="food">Food</option><option value="truck">Truck Stop</option><option value="retail">Retail</option><option value="services">Services</option></select>
+    <select id="bCat"><option value="food">Food</option><option value="truck">Truck Stop</option><option value="retail">Retail</option><option value="services">Services</option><option value="bookstore">Bookstore</option></select>
     <input id="bPhone" placeholder="Phone / WhatsApp e.g. 015 534 1234">
     <input id="bLoc" placeholder="Location e.g. Musina, Central">
     <textarea id="bDesc" placeholder="What do you sell? e.g. Chicken, chips, burgers, affordable meals"></textarea>
@@ -139,24 +192,24 @@ footer a{color:#FFD9B0;text-decoration:none}
 <script>
 let businesses=[
   {name:"MOONATE KO KASI",cat:"food",rating:"5.0 ★",type:"Fast Food • Delivery • Proudly Kasi",loc:"Musina, Central • 20-35 min delivery",desc:"Giant Rolls Box, Loaded Tower, Cheese Burger, Classic Burger. FREE delivery within 3km. Est 2023. Phone: 0799073779",img:"pic1.jpg",gallery:["pic2.jpg","pic3.jpg"],link:"https://musinapos.github.io/moonate-ko-kasi/",open:"Open now • 08:00-22:00"},
-  {name:"FEAST Burgers & Pap",cat:"food",rating:"4.6 ★",type:"Burgers • Pap • Takeaway",loc:"Musina, Central • 1.2km away",desc:"Known for loaded burgers, pap & gravy, shisanyama meals",img:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80",open:"Open now • 08:00-22:00"},
-  {name:"Middle Orange Truck Stop",cat:"truck",rating:"4.4 ★",type:"Fuel • Food • Rest Stop • 24/7",loc:"N1 Highway, Musina • 3.5km away",desc:"Truck stop, coffee, meals, convenience store & rest area",img:"https://images.unsplash.com/photo-1545262810-77515b6ee1d5?w=600&q=80",open:"Open now • 24 hours"},
-  {name:"Ele's Fast Food Restaurant",cat:"food",rating:"4.5 ★",type:"Fast Food • Chicken • Chips",loc:"Musina, Industrial • 0.8km away",desc:"Chicken, chips, burgers, affordable meals for locals. The Greatest Taste You Have Ever Imagined.",img:"https://images.unsplash.com/photo-1562967914-608f82629710?w=600&q=80",open:"Open now • 09:00-21:00"},
+  {name:"TAHOR Kids Bookstore",cat:"bookstore",rating:"5.0 ★",type:"Kids Books • TAHOR Book • Read & Learn",loc:"Musina • Online • All South Africa",desc:"TAHOR Kids Book - Passion Over Laziness. Book 1 for kids 5-10. Inside the Bookstore mini-app. FREE for testing.",img:"https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&q=80",open:"Open now • 24/7 Online",isBookstore:true},
 ];
 let currentCat='all';
 function render(){
   let q=document.getElementById('searchInput').value.toLowerCase();
   let grid=document.getElementById('businessGrid');
-  let filtered=businesses.filter(b=>(currentCat==='all'||b.cat===currentCat||(currentCat==='food'&&b.cat==='food')) && (b.name.toLowerCase().includes(q)||b.desc.toLowerCase().includes(q)));
+  let filtered=businesses.filter(b=>(currentCat==='all'||b.cat===currentCat) && (b.name.toLowerCase().includes(q)||b.desc.toLowerCase().includes(q)));
   grid.innerHTML=filtered.map(b=>`
     <div class="card"><img src="${b.img}">${b.gallery?`<div class="gallery"><img src="${b.gallery[0]}"><img src="${b.gallery[1]}"></div>`:''}<div class="card-body">
-    <span class="badge">${b.cat.toUpperCase()} • ${b.type}</span>
+    <span class="badge ${b.cat==='bookstore'?'book':''}">${b.cat.toUpperCase()} • ${b.type}</span>
     <h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div>
     <p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p>
-    <a href="${b.link||'#'}" class="btn">View Details →</a></div></div>`).join('') || '<p style="text-align:center">No businesses found. Try another search.</p>';
+    ${b.isBookstore?`<a class="btn book" onclick="openBookstore()">📚 Open Bookstore →</a>`:`<a href="${b.link||'#'}" class="btn">View Details →</a>`}</div></div>`).join('') || '<p style="text-align:center">No businesses found. Try another search.</p>';
 }
 function setCat(cat,el){currentCat=cat;document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));el.classList.add('active');render();}
 function filterBusinesses(){render();}
+function openBookstore(){document.getElementById('bookModal').classList.add('open');document.body.style.overflow='hidden';}
+function closeBookstore(){document.getElementById('bookModal').classList.remove('open');document.body.style.overflow='auto';}
 function selectPlan(p){document.getElementById('bPlan').value=p;document.getElementById('add').scrollIntoView({behavior:'smooth'});alert('You selected '+p+' — fill the form to join!');}
 function addBusiness(){
   let name=document.getElementById('bName').value,desc=document.getElementById('bDesc').value,loc=document.getElementById('bLoc').value,cat=document.getElementById('bCat').value;
