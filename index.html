@@ -10,7 +10,7 @@
 <meta property="og:image" content="icon.jpg">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif}
-:root{--blue:#0A4A8C;--dark:#0B3A6B;--orange:#FF6B00;--light:#E6F0FA}
+:root{--blue:#0A4A8C;--dark:#0B3A6B;--orange:#FF6B00}
 body{background:#fff;color:#222}
 header{background:var(--blue);color:#fff;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
 .logo{font-weight:900;font-size:28px;letter-spacing:1px}
@@ -26,15 +26,12 @@ nav a{color:#fff;text-decoration:none}
 .search button{background:var(--orange);color:#fff;border:none;padding:10px 22px;border-radius:20px;font-weight:bold;cursor:pointer}
 .meta{font-size:12px;margin-top:10px;color:#555}
 .categories{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;padding:22px 15px}
-.cat{padding:14px 22px;border-radius:30px;border:none;cursor:pointer;font-weight:800;font-size:14px;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15);transition:all .2s ease;display:flex;align-items:center;gap:8px}
-.cat:active{transform:scale(.95)}
-.cat.active{transform:scale(1.05);box-shadow:0 6px 18px rgba(0,0,0,.25);outline:3px solid #fff;outline-offset:2px}
+.cat{padding:14px 22px;border-radius:30px;border:none;cursor:pointer;font-weight:800;font-size:14px;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15);display:flex;align-items:center;gap:8px}
+.cat.active{transform:scale(1.05);outline:3px solid #fff;outline-offset:2px}
 .cat.food{background:linear-gradient(135deg,#FF6B00,#FF8A3D)}
-.cat.truck{background:linear-gradient(135deg,#0A4A8C,#1E6FC1)}
 .cat.retail{background:linear-gradient(135deg,#EC4899,#F472B6)}
 .cat.services{background:linear-gradient(135deg,#0F766E,#14B8A6)}
 .cat.book{background:linear-gradient(135deg,#6C2BD9,#9B5CFF)}
-.cat.blue{background:var(--blue);color:#fff}
 .section{max-width:1100px;margin:auto;padding:10px 15px 30px}
 .section h2{text-align:center;color:var(--dark);font-size:24px;margin:10px 0}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:20px}
@@ -51,7 +48,7 @@ nav a{color:#fff;text-decoration:none}
 .pricing{background:#FFEADF;padding:35px 15px;text-align:center}
 .pricing h2{color:var(--dark);font-size:26px}
 .pricing-grid{max-width:1000px;margin:20px auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
-.plan{background:#fff;border-radius:14px;padding:22px;text-align:left;border:2px solid var(--blue);position:relative}
+.plan{background:#fff;border-radius:14px;padding:22px;text-align:left;border:2px solid var(--blue)}
 .plan.featured{background:var(--orange);color:#fff;border-color:var(--orange)}
 .plan h3{font-size:18px}.plan.price{font-size:36px;font-weight:900;margin:8px 0}
 .plan ul{list-style:none;font-size:13px;line-height:2}
@@ -64,37 +61,45 @@ footer{background:var(--dark);color:#fff;padding:25px 15px;text-align:center;fon
 footer a{color:#FFD9B0;text-decoration:none}
 .gallery{display:flex;gap:5px;padding:5px 5px 0}
 .gallery img{width:50%;height:90px;object-fit:cover;border-radius:8px}
+/* BOOKSTORE SHELVES */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;z-index:999;overflow-y:auto;padding:15px}
 .modal.open{display:block}
 .modal-inner{max-width:700px;margin:20px auto;background:#fff;border-radius:20px;overflow:hidden}
 .modal-head{background:#6C2BD9;color:#fff;padding:20px;text-align:center}
 .modal-head h2{font-size:22px}
-.modal-head p{font-size:13px;opacity:.9;margin-top:5px}
-.book-page{padding:20px;border-bottom:1px solid #eee}
-.book-page h3{color:#6C2BD9;margin-bottom:8px}
-.book-page p{font-size:15px;line-height:1.6;color:#333}
-.book-page img{width:100%;border-radius:12px;margin-bottom:10px;max-height:320px;object-fit:cover}
 .close-btn{background:#fff;color:#6C2BD9;border:none;padding:10px 18px;border-radius:20px;font-weight:bold;cursor:pointer;margin-top:10px}
+.store-banner{width:100%;height:180px;object-fit:cover}
+.shelf-wrap{padding:20px;background:#FFF7ED}
+.shelf-title{color:#6C2BD9;font-size:18px;margin:5px 0 12px}
+.shelf{display:flex;gap:16px;align-items:flex-end;background:#EAD9B5;padding:18px 18px 0;border-radius:12px;min-height:220px;border-bottom:10px solid #8B5A2B;box-shadow:0 10px 20px rgba(0,0,0,.15)}
+.book-on-shelf{width:130px;text-align:center;cursor:pointer;transition:.2s}
+.book-on-shelf:active{transform:scale(.95)}
+.book-on-shelf img{width:120px;height:175px;object-fit:cover;border-radius:6px 10px 10px 6px;box-shadow:4px 4px 10px rgba(0,0,0,.35);border-left:4px solid #fff}
+.book-on-shelf b{font-size:12px;color:#333;display:block;margin-top:6px}
+.book-on-shelf small{font-size:11px;color:#6C2BD9;font-weight:bold}
+.empty-slot{width:90px;height:140px;border:2px dashed #C9A86A;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#8B5A2B;font-size:11px;text-align:center;padding:5px}
 .wa-btn{display:block;background:#25D366;color:#fff;text-align:center;padding:13px;border-radius:12px;font-weight:bold;text-decoration:none;margin:15px 20px 20px}
+/* READER */
+.reader{padding:20px;text-align:center}
+.reader img{width:100%;max-height:380px;object-fit:cover;border-radius:12px}
+.reader h3{color:#6C2BD9;margin:12px 0 6px}
+.reader p{font-size:15px;line-height:1.6;color:#333}
+.reader-nav{display:flex;justify-content:space-between;gap:10px;margin-top:15px}
+.reader-nav button{flex:1;padding:12px;border:none;border-radius:10px;font-weight:bold;cursor:pointer;background:#6C2BD9;color:#fff}
+.reader-nav button:disabled{opacity:.4}
 </style>
 </head>
 <body>
 
 <header>
   <div class="logo">TA<span>HOR</span><small>BUSINESSES MARKETING PLATFORM</small></div>
-  <nav>
-    <a href="#">Home</a><a href="#businesses">Businesses</a><a href="#pricing">Pricing</a><a href="#">About</a><a href="#">Contact</a>
-    <a href="#add" class="cta">Add Your Business in the Pot</a>
-  </nav>
+  <nav><a href="#">Home</a><a href="#businesses">Businesses</a><a href="#pricing">Pricing</a><a href="#">About</a><a href="#">Contact</a><a href="#add" class="cta">Add Your Business in the Pot</a></nav>
 </header>
 
 <div class="hero">
   <h1>ALL MUSINA BUSINESSES<br>IN ONE PLACE</h1>
   <p>Discover, connect, and support local businesses in Musina — all in one platform.</p>
-  <div class="search">
-    <input id="searchInput" placeholder="Search for restaurants, shops, services in Musina..." oninput="filterBusinesses()">
-    <button onclick="filterBusinesses()">Search</button>
-  </div>
+  <div class="search"><input id="searchInput" placeholder="Search for restaurants, shops, services in Musina..." oninput="filterBusinesses()"><button onclick="filterBusinesses()">Search</button></div>
   <div class="meta">📍 Located in Musina • Limpopo • South Africa • 100+ businesses listed</div>
 </div>
 
@@ -105,11 +110,9 @@ footer a{color:#FFD9B0;text-decoration:none}
   <div class="cat book" onclick="setCat('bookstore',this)">📚 TAHOR Kids Bookstore</div>
 </div>
 
-<div class="section">
-  <h2>Featured Businesses</h2>
-  <div class="grid" id="businessGrid"></div>
-</div>
+<div class="section"><h2>Featured Businesses</h2><div class="grid" id="businessGrid"></div></div>
 
+<!-- BOOKSTORE WITH SHELVES -->
 <div id="bookModal" class="modal">
   <div class="modal-inner">
     <div class="modal-head">
@@ -117,90 +120,68 @@ footer a{color:#FFD9B0;text-decoration:none}
       <p>Inside TAHOR • For Kids in Musina & Everywhere</p>
       <button class="close-btn" onclick="closeBookstore()">✕ Close Store</button>
     </div>
-    <div class="book-page">
-      <img src="pic4.jpg" alt="TAHOR Kids Bookstore Shop">
-      <h3>Welcome to TAHOR Kids Bookstore</h3>
-      <p>Your bookstore is now open! Browse our books for kids.</p>
-    </div>
-    <div class="book-page">
-      <img src="pic5.jpg" alt="Book Cover">
-      <h3>TAHOR Kids Book - Passion Over Laziness</h3>
-      <p><b>By TAHOR Kids • Age 5-10 • English</b><br>Passion is doing what you love, even when it's hard. Laziness is waiting for tomorrow. This book teaches kids to choose passion every day.</p>
-      <p><b>Price: FREE for Testing</b> • Later: R50 PDF / R150 Printed</p>
-    </div>
-    <div class="book-page">
-      <img src="pic6.jpg" alt="Page 1">
-      <h3>Page 1 - Meet TAHOR</h3>
-      <p>TAHOR is a bright, happy kid in Musina. He loves reading, running and helping his mom. He wakes up early and says: "Today I will do my best!"</p>
-    </div>
-    <div class="book-page">
-      <img src="pic7.jpg" alt="Page 2">
-      <h3>Page 2 - Passion vs Laziness</h3>
-      <p>One day, Laziness says: "Sleep more, don't read." Passion says: "Get up, let's learn, let's grow!" TAHOR chooses Passion.</p>
-    </div>
-    <div class="book-page">
-      <img src="pic8.jpg" alt="Page 3">
-      <h3>Page 3 - TAHOR Tries Hard</h3>
-      <p>TAHOR reads one page, then two, then a whole book! He helps his friends. He feels proud because he did not give up.</p>
-    </div>
-    <div class="book-page">
-      <img src="pic9.jpg" alt="Page 4">
-      <h3>Page 4 - Passion Wins</h3>
-      <p>When you choose passion, you grow big and strong. Laziness makes you small. TAHOR says: "Passion over laziness, always!"</p>
-      <p style="margin-top:10px;color:#6C2BD9;font-weight:bold">Page 5 - Testing Only - No picture needed yet, we are just testing.</p>
+    <img class="store-banner" src="pic4.jpg" alt="Bookstore">
+    <div class="shelf-wrap">
+      <div class="shelf-title">📚 Shelf 1 — Passion Books</div>
+      <div class="shelf">
+        <div class="book-on-shelf" onclick="openBook()">
+          <img src="pic5.jpg" alt="Book Cover">
+          <b>Passion Over Laziness</b>
+          <small>👆 Tap to Open</small>
+        </div>
+        <div class="empty-slot">Coming Soon<br>Book 2</div>
+        <div class="empty-slot">Coming Soon<br>Book 3</div>
+      </div>
+      <p style="font-size:12px;color:#666;margin-top:10px;text-align:center">Shelf 1 • More books coming soon — we will add more shelves later</p>
     </div>
     <a class="wa-btn" href="https://wa.me/27799073779?text=Hi%20TAHOR%20Kids%20Bookstore!%20I%20want%20Passion%20Over%20Laziness" target="_blank">📱 Order on WhatsApp</a>
   </div>
 </div>
 
-<div class="pricing" id="pricing">
-  <h2>Pricing Plans</h2>
-  <p>Choose the plan that grows your business locally</p>
-  <div class="pricing-grid">
-    <div class="plan">
-      <h3>Standard</h3><div class="price">R60<span style="font-size:16px">/month</span></div>
-      <ul><li>✓ Basic business listing</li><li>✓ Contact details & location</li><li>✓ Up to 5 photos</li><li>✓ Customer contact visibility</li></ul>
-      <button onclick="selectPlan('Standard R60')">Choose Standard</button>
+<!-- BOOK READER - PAGES ALIGNED -->
+<div id="readerModal" class="modal">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h2>📖 Passion Over Laziness</h2>
+      <p id="readerPageLabel">Cover — Page 1 of 6</p>
+      <button class="close-btn" onclick="closeBook()">✕ Close Book</button>
     </div>
-    <div class="plan featured">
-      <div style="background:#fff;color:#FF6B00;font-size:11px;font-weight:bold;padding:4px 10px;border-radius:20px;display:inline-block">MOST POPULAR</div>
-      <h3>Featured</h3><div class="price">R100<span style="font-size:16px">/month</span></div>
-      <ul><li>✓ Highlighted listing</li><li>✓ Priority in search results</li><li>✓ Up to 15 photos</li><li>✓ Promo banner inclusion</li><li>✓ Analytics insights</li></ul>
-      <button onclick="selectPlan('Featured R100')">Get Featured</button>
-    </div>
-    <div class="plan">
-      <h3>Bus Sponsor</h3><div class="price">R140<span style="font-size:16px">/month</span></div>
-      <ul><li>✓ Top Banner sponsorship</li><li>✓ Logo featured in Bus Sponsor section</li><li>✓ Up to 30 photos</li><li>✓ Analytics dashboard access</li></ul>
-      <button onclick="selectPlan('Bus Sponsor R140')">Become Sponsor</button>
+    <div class="reader">
+      <img id="readerImg" src="pic5.jpg">
+      <h3 id="readerTitle">Cover — Passion Over Laziness</h3>
+      <p id="readerText">By TAHOR Kids • Age 5-10 • English<br>Passion is doing what you love, even when it's hard. Laziness is waiting for tomorrow.</p>
+      <div class="reader-nav">
+        <button id="prevBtn" onclick="prevPage()" disabled>← Prev</button>
+        <button onclick="nextPage()">Next →</button>
+      </div>
+      <p style="font-size:12px;color:#888;margin-top:10px">Tap Next to turn the page like a real book</p>
     </div>
   </div>
 </div>
 
-<div class="section" id="add">
-  <div style="background:var(--blue);color:#fff;padding:25px;border-radius:16px;text-align:center">
-    <h2 style="color:#fff">Ready to grow your business?</h2>
-    <p>Join hundreds of Musina businesses growing their reach with TAHOR.</p>
+<div class="pricing" id="pricing">
+  <h2>Pricing Plans</h2><p>Choose the plan that grows your business locally</p>
+  <div class="pricing-grid">
+    <div class="plan"><h3>Standard</h3><div class="price">R60<span style="font-size:16px">/month</span></div><ul><li>✓ Basic business listing</li><li>✓ Contact details & location</li><li>✓ Up to 5 photos</li><li>✓ Customer contact visibility</li></ul><button onclick="selectPlan('Standard R60')">Choose Standard</button></div>
+    <div class="plan featured"><div style="background:#fff;color:#FF6B00;font-size:11px;font-weight:bold;padding:4px 10px;border-radius:20px;display:inline-block">MOST POPULAR</div><h3>Featured</h3><div class="price">R100<span style="font-size:16px">/month</span></div><ul><li>✓ Highlighted listing</li><li>✓ Priority in search results</li><li>✓ Up to 15 photos</li><li>✓ Promo banner inclusion</li><li>✓ Analytics insights</li></ul><button onclick="selectPlan('Featured R100')">Get Featured</button></div>
+    <div class="plan"><h3>Bus Sponsor</h3><div class="price">R140<span style="font-size:16px">/month</span></div><ul><li>✓ Top Banner sponsorship</li><li>✓ Logo featured in Bus Sponsor section</li><li>✓ Up to 30 photos</li><li>✓ Analytics dashboard access</li></ul><button onclick="selectPlan('Bus Sponsor R140')">Become Sponsor</button></div>
   </div>
-  <div class="form-wrap">
-    <h2 style="color:var(--dark)">ADD YOUR BUSINESS IN THE POT</h2>
+</div>
+
+<div class="section" id="add">
+  <div style="background:var(--blue);color:#fff;padding:25px;border-radius:16px;text-align:center"><h2 style="color:#fff">Ready to grow your business?</h2><p>Join hundreds of Musina businesses growing their reach with TAHOR.</p></div>
+  <div class="form-wrap"><h2 style="color:var(--dark)">ADD YOUR BUSINESS IN THE POT</h2>
     <input id="bName" placeholder="Business Name e.g. Ele's Fast Food">
     <select id="bCat"><option value="food">Food</option><option value="truck">Truck Stop</option><option value="retail">Retail</option><option value="services">Services</option><option value="bookstore">Bookstore</option></select>
     <input id="bPhone" placeholder="Phone / WhatsApp e.g. 015 534 1234">
     <input id="bLoc" placeholder="Location e.g. Musina, Central">
     <textarea id="bDesc" placeholder="What do you sell? e.g. Chicken, chips, burgers, affordable meals"></textarea>
     <select id="bPlan"><option>Standard R60/month</option><option>Featured R100/month</option><option>Bus Sponsor R140/month</option></select>
-    <button onclick="addBusiness()">Add My Business →</button>
-    <p id="msg" style="text-align:center;color:green;margin-top:10px"></p>
+    <button onclick="addBusiness()">Add My Business →</button><p id="msg" style="text-align:center;color:green;margin-top:10px"></p>
   </div>
 </div>
 
-<footer>
-  <strong style="font-size:20px">TA<span style="color:#FF6B00">HOR</span></strong><br>
-  Connecting Musina businesses and customers since 2024.<br>
-  info@tahor.co.za • 015 534 1234 • Musina, Limpopo<br>
-  <a href="#">Businesses • Pricing • About Us • Support</a><br>
-  © 2024 TAHOR Businesses Marketing Platform • www.tahor.co.za • Privacy Policy • Terms of Service • All Rights Reserved
-</footer>
+<footer><strong style="font-size:20px">TA<span style="color:#FF6B00">HOR</span></strong><br>Connecting Musina businesses and customers since 2024.<br>info@tahor.co.za • 015 534 1234 • Musina, Limpopo<br><a href="#">Businesses • Pricing • About Us • Support</a><br>© 2024 TAHOR Businesses Marketing Platform • www.tahor.co.za • Privacy Policy • Terms of Service • All Rights Reserved</footer>
 
 <script>
 let businesses=[
@@ -232,6 +213,32 @@ function addBusiness(){
   document.getElementById('bName').value='';
 }
 render();
+
+// BOOK READER LOGIC - PAGES ALIGNED
+let pages=[
+  {img:"pic5.jpg",title:"Cover — Passion Over Laziness",text:"By TAHOR Kids • Age 5-10 • English<br>Passion is doing what you love, even when it's hard. Laziness is waiting for tomorrow."},
+  {img:"pic6.jpg",title:"Page 1 — Meet TAHOR",text:"TAHOR is a bright, happy kid in Musina. He loves reading, running and helping his mom. He wakes up early and says: 'Today I will do my best!'"},
+  {img:"pic7.jpg",title:"Page 2 — Passion vs Laziness",text:"One day, Laziness says: 'Sleep more, don't read.' Passion says: 'Get up, let's learn, let's grow!' TAHOR chooses Passion."},
+  {img:"pic8.jpg",title:"Page 3 — TAHOR Tries Hard",text:"TAHOR reads one page, then two, then a whole book! He helps his friends. He feels proud because he did not give up."},
+  {img:"pic9.jpg",title:"Page 4 — Passion Wins",text:"When you choose passion, you grow big and strong. Laziness makes you small. TAHOR says: 'Passion over laziness, always!'"},
+  {img:"pic9.jpg",title:"Page 5 — The End",text:"Testing Only — Page 5. This is the end of our test book. More books coming soon to Shelf 1!"},
+];
+let currentPage=0;
+function openBook(){
+  currentPage=0; showPage();
+  document.getElementById('readerModal').classList.add('open');
+}
+function closeBook(){document.getElementById('readerModal').classList.remove('open');}
+function showPage(){
+  let p=pages[currentPage];
+  document.getElementById('readerImg').src=p.img;
+  document.getElementById('readerTitle').innerText=p.title;
+  document.getElementById('readerText').innerHTML=p.text;
+  document.getElementById('readerPageLabel').innerText=(currentPage===0?'Cover — Page 1 of 6':'Page '+(currentPage+1)+' of 6');
+  document.getElementById('prevBtn').disabled = currentPage===0;
+}
+function nextPage(){ if(currentPage < pages.length-1){currentPage++; showPage();} }
+function prevPage(){ if(currentPage > 0){currentPage--; showPage();} }
 </script>
 </body>
 </html>
