@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TAHOR - All Musina Businesses In One Place</title>
+<link rel="icon" href="icon.jpg">
+<link rel="apple-touch-icon" href="icon.jpg">
+<meta name="theme-color" content="#0A4A8C">
+<meta property="og:image" content="icon.jpg">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif}
 :root{--blue:#0A4A8C;--dark:#0B3A6B;--orange:#FF6B00;--light:#E6F0FA}
@@ -114,24 +118,33 @@ footer a{color:#FFD9B0;text-decoration:none}
       <button class="close-btn" onclick="closeBookstore()">✕ Close Store</button>
     </div>
     <div class="book-page">
-      <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&q=80" alt="TAHOR Book Cover">
+      <img src="pic4.jpg" alt="TAHOR Kids Bookstore Shop">
+      <h3>Welcome to TAHOR Kids Bookstore</h3>
+      <p>Your bookstore is now open! Browse our books for kids.</p>
+    </div>
+    <div class="book-page">
+      <img src="pic5.jpg" alt="Book Cover">
       <h3>TAHOR Kids Book - Passion Over Laziness</h3>
       <p><b>By TAHOR Kids • Age 5-10 • English</b><br>Passion is doing what you love, even when it's hard. Laziness is waiting for tomorrow. This book teaches kids to choose passion every day.</p>
       <p><b>Price: FREE for Testing</b> • Later: R50 PDF / R150 Printed</p>
     </div>
     <div class="book-page">
+      <img src="pic6.jpg" alt="Page 1">
       <h3>Page 1 - Meet TAHOR</h3>
       <p>TAHOR is a bright, happy kid in Musina. He loves reading, running and helping his mom. He wakes up early and says: "Today I will do my best!"</p>
     </div>
     <div class="book-page">
+      <img src="pic7.jpg" alt="Page 2">
       <h3>Page 2 - Passion vs Laziness</h3>
       <p>One day, Laziness says: "Sleep more, don't read." Passion says: "Get up, let's learn, let's grow!" TAHOR chooses Passion.</p>
     </div>
     <div class="book-page">
+      <img src="pic8.jpg" alt="Page 3">
       <h3>Page 3 - TAHOR Tries Hard</h3>
       <p>TAHOR reads one page, then two, then a whole book! He helps his friends. He feels proud because he did not give up.</p>
     </div>
     <div class="book-page">
+      <img src="pic9.jpg" alt="Page 4">
       <h3>Page 4 - Passion Wins</h3>
       <p>When you choose passion, you grow big and strong. Laziness makes you small. TAHOR says: "Passion over laziness, always!"</p>
       <p style="margin-top:10px;color:#6C2BD9;font-weight:bold">Page 5 - Testing Only - No picture needed yet, we are just testing.</p>
@@ -192,7 +205,7 @@ footer a{color:#FFD9B0;text-decoration:none}
 <script>
 let businesses=[
   {name:"MOONATE KO KASI",cat:"food",rating:"5.0 ★",type:"Fast Food • Delivery • Proudly Kasi",loc:"Musina, Central • 20-35 min delivery",desc:"Giant Rolls Box, Loaded Tower, Cheese Burger, Classic Burger. FREE delivery within 3km. Est 2023. Phone: 0799073779",img:"pic1.jpg",gallery:["pic2.jpg","pic3.jpg"],link:"https://musinapos.github.io/moonate-ko-kasi/",open:"Open now • 08:00-22:00"},
-  {name:"TAHOR Kids Bookstore",cat:"bookstore",rating:"5.0 ★",type:"Kids Books • TAHOR Book • Read & Learn",loc:"Musina • Online • All South Africa",desc:"TAHOR Kids Book - Passion Over Laziness. Book 1 for kids 5-10. Inside the Bookstore mini-app. FREE for testing.",img:"https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&q=80",open:"Open now • 24/7 Online",isBookstore:true},
+  {name:"TAHOR Kids Bookstore",cat:"bookstore",rating:"5.0 ★",type:"Kids Books • TAHOR Book • Read & Learn",loc:"Musina • Online • All South Africa",desc:"TAHOR Kids Book - Passion Over Laziness. Book 1 for kids 5-10. Inside the Bookstore mini-app. FREE for testing.",img:"pic4.jpg",open:"Open now • 24/7 Online",isBookstore:true},
 ];
 let currentCat='all';
 function render(){
