@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAHOR Pre-Order Cards</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f4f4f4;margin:0;padding:15px}
+.header{background:#0b5e2f;color:#fff;padding:18px;border-radius:12px;text-align:center}
+.header h1{margin:0;font-size:24px}
+.header p{margin:8px 0 0;font-size:14px}
+.info{background:#fff;padding:14px;border-radius:12px;margin:12px 0;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.info h2{margin:0 0 8px;font-size:17px;color:#0b5e2f}
+.info p{font-size:14px;color:#333;line-height:1.6}
+#moreInfo{display:none;font-size:14px;color:#333;line-height:1.6}
+.btn-learn{background:#0b5e2f;color:#fff;border:none;padding:10px 16px;border-radius:8px;cursor:pointer;width:100%;font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:12px}
+.card{background:#fff;border-radius:12px;padding:10px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.card img{width:100%;height:110px;object-fit:cover;border-radius:8px}
+.card input{width:60px;padding:5px;text-align:center;margin:5px}
+.price{font-weight:bold;color:#0b5e2f}
+button.order{background:#25D366;color:#fff;border:none;padding:14px 18px;border-radius:8px;font-size:16px;width:100%;margin-top:16px;cursor:pointer}
+.edit{font-size:12px;color:#0b5e2f;cursor:pointer;display:block;margin-top:5px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>TAHOR Pre-Order Cards</h1>
+  <p>Order from Musina • Collect at Border • Pay on Collect</p>
+</div>
+
+<div class="info">
+  <h2>What is TAHOR Pre-Order Cards?</h2>
+  <p><b>Pre-order before you travel.</b> Choose your goods here in Musina, we get them ready for you, you collect at the border and pay when you collect.</p>
+  <div id="moreInfo">
+    <p>✅ <b>No upfront payment</b> - You only pay when you collect your order.</p>
+    <p>✅ <b>No waiting in shops</b> - Your goods are already packed and ready.</p>
+    <p>✅ <b>Easy ordering</b> - Tap the quantity, see the total, send on WhatsApp.</p>
+    <p>✅ <b>For traders and shoppers</b> - Order cooking oil, mealie meal, rice, sugar, soap and more.</p>
+    <p>✅ <b>How it works:</b> 1. Select items & quantity. 2. Tap Send Order on WhatsApp. 3. We confirm on WhatsApp. 4. You collect at the border and pay.</p>
+  </div>
+  <button class="btn-learn" onclick="toggleLearn()">Learn More ▼</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<button class="order" onclick="sendOrder()">Send Order on WhatsApp - 0799073779</button>
+
+<script>
+function toggleLearn(){
+  let m=document.getElementById('moreInfo');
+  m.style.display = m.style.display==='block' ? 'none' : 'block';
+}
+const items=[
+{name:"Cooking Oil 2L",price:65,img:"https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400"},
+{name:"Mealie Meal 10kg",price:95,img:"https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400"},
+{name:"Rice 10kg",price:120,img:"https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400"},
+{name:"Sugar 10kg",price:110,img:"https://images.unsplash.com/photo-1581441363689-1f3c3c414635?w=400"},
+{name:"Bath Soap",price:25,img:"https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=400"},
+{name:"Washing Powder",price:45,img:"https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=400"},
+{name:"Flour 10kg",price:90,img:"https://images.unsplash.com/photo-1627485937980-221c88ac04f9?w=400"},
+{name:"Beans 2kg",price:50,img:"https://images.unsplash.com/photo-1585996484833-cf3d1e0c8e7c?w=400"},
+{name:"Salt 1kg",price:15,img:"https://images.unsplash.com/photo-1518110925495-5fe2fda0442c?w=400"},
+{name:"Tea Bags",price:35,img:"https://images.unsplash.com/photo-1561336313-0bd5e0b27ec8?w=400"}
+];
+const grid=document.getElementById('grid');
+items.forEach((it,i)=>{
+  const d=document.createElement('div'); d.className='card';
+  d.innerHTML=`<img src="${it.img}" id="img${i}"><b>${it.name}</b><br>
+  <span class="price">R <span contenteditable="true" id="p${i}">${it.price}</span></span><br>
+  Qty: <input type="number" id="q${i}" value="0" min="0"><br>
+  <span class="edit" onclick="changePhoto(${i})">Change Photo</span>
+  <input type="file" id="f${i}" accept="image/*" style="display:none" onchange="readPhoto(event,${i})">`;
+  grid.appendChild(d);
+});
+function changePhoto(i){document.getElementById('f'+i).click()}
+function readPhoto(e,i){const r=new FileReader();r.onload=()=>document.getElementById('img'+i).src=r.result;r.readAsDataURL(e.target.files[0])}
+function sendOrder(){
+  let msg="Hello TAHOR Pre-Order%0A";
+  let total=0;
+  items.forEach((it,i)=>{
+    let q=document.getElementById('q'+i).value;
+    let p=document.getElementById('p'+i).innerText;
+    if(q>0){msg+=`${it.name} x${q} = R${q*p}%0A`; total+=q*p}
+  });
+  msg+=`Total: R${total}`;
+  window.open("https://wa.me/27799073779?text="+msg,"_blank");
+}
+</script>
+</body>
+</html>
