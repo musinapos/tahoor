@@ -17,8 +17,8 @@ header{background:var(--blue);color:#fff;padding:15px 20px;display:flex;justify-
 .logo span{color:var(--orange)}.logo small{display:block;font-size:10px;font-weight:400;letter-spacing:2px;color:#FFD9B0}
 nav{display:flex;gap:18px;align-items:center;font-size:14px}
 nav a{color:#fff;text-decoration:none}
-.cta{background:var(--orange);padding:10px 16px;border-radius:20px;color:#fff!important;font-weight:bold;animation:beepLight 1.1s infinite}
-@keyframes beepLight{0%,100%{box-shadow:0 0 0px #FF6B00;background:#FF6B00}50%{box-shadow:0 0 20px #FFB800,0 0 35px #FF6B00;background:#FF7A1A}}
+.cta{background:var(--orange);padding:10px 16px;border-radius:20px;color:#fff!important;font-weight:bold;animation:beepLight 2.5s infinite}
+@keyframes beepLight{0%,100%{box-shadow:0 0 0px #FF6B00;background:#FF6B00}50%{box-shadow:0 0 8px #FFB800,0 0 12px #FF6B00;background:#FF6B00}}
 .hero{background:linear-gradient(180deg,#D8E8F7,#EAF3FB);text-align:center;padding:40px 15px}
 .hero h1{color:var(--dark);font-size:32px;line-height:1.1;display:flex;align-items:center;justify-content:center;gap:10px}
 .hero p{margin:10px 0 20px;color:#444}
@@ -29,7 +29,7 @@ nav a{color:#fff;text-decoration:none}
 #cursor{animation:blink .9s infinite;font-weight:bold;color:var(--dark)}
 @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
 .categories{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;padding:22px 15px}
-.cat{padding:14px 22px;border-radius:30px;border:none;cursor:pointer;font-weight:800;font-size:14px;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15);display:flex;align-items:center;gap:8px}
+.cat{padding:18px 28px;border-radius:30px;border:3px solid rgba(255,255,255,.6);cursor:pointer;font-weight:900;font-size:15px;color:#fff;box-shadow:0 6px 16px rgba(0,0,0,.25);display:flex;align-items:center;gap:8px}
 .cat.active{transform:scale(1.05);outline:3px solid #fff;outline-offset:2px}
 .cat.food{background:linear-gradient(135deg,#FF6B00,#FF8A3D)}
 .cat.retail{background:linear-gradient(135deg,#EC4899,#F472B6)}
@@ -111,20 +111,6 @@ footer a{color:#FFD9B0;text-decoration:none}
   <div class="cat services" onclick="setCat('services',this)">🔧 Services</div>
   <div class="cat book" onclick="setCat('bookstore',this)">📚 TAHOR Kids Bookstore</div>
   <div class="cat preorder" onclick="window.location.href='pre-order.html'">🛒 TAHOR Pre-Order Cards</div>
-</div>
-
-<!-- TAKEALOT CARD - TOP -->
-<div class="section" style="padding-top:0;padding-bottom:0">
-  <div class="card" onclick="openTakealot()" style="cursor:pointer;border:2px solid #0070C9">
-    <img src="takealot.jpg" alt="Takealot" onerror="this.src='https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=800&q=80'">
-    <div class="card-body">
-      <span class="badge" style="background:#0070C9">RETAIL • BIG PARTNER</span>
-      <h3>TAKEALOT</h3>
-      <div class="stars">⭐⭐⭐⭐⭐ 5.0 ★</div>
-      <p>🕒 Open now • 24/7 Online<br>📍 South Africa • Delivers to Musina • Ext 14 House 5224<br>Electronics, Fashion, Home, Beauty & More. South Africa's biggest online shop. Shop via TAHOR — Personal Shopper. Call 068 036 1133 / WhatsApp 079 907 3779 / 072 566 0255</p>
-      <a class="btn" style="border-color:#0070C9;color:#0070C9" onclick="event.stopPropagation();openTakealot()">🛒 Shop Takealot →</a>
-    </div>
-  </div>
 </div>
 
 <div class="section"><h2>Featured Businesses</h2><div class="grid" id="businessGrid"></div></div>
@@ -289,7 +275,7 @@ function typeEffect(){
       setTimeout(typeEffect, 1200);
       return;
     }
-    setTimeout(typeEffect, 220); // was 110, now 220 = 2x slower
+    setTimeout(typeEffect, 220);
   } else {
     charIndex--;
     el.textContent = textToType.substring(0, charIndex);
@@ -298,7 +284,7 @@ function typeEffect(){
       setTimeout(typeEffect, 0);
       return;
     }
-    setTimeout(typeEffect, 60); // was 30, now 60 = 2x slower delete too
+    setTimeout(typeEffect, 60);
   }
 }
 typeEffect();
