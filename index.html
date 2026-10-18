@@ -13,23 +13,17 @@ header{background:#0A4A8C;color:#fff;padding:14px 16px;display:flex;align-items:
 .logo img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid #FF6B00}
 .logo b{font-size:20px;letter-spacing:1px}.logo b span{color:#FF6B00}
 .logo small{display:block;font-size:10px;font-weight:400;color:#D0E4FF}
-
-/* ORANGE CORNER BUTTON - LIGHT ON/OFF, WORDS STAY */
 .header-btn{background:#FF6B00;color:#fff;padding:8px 14px;border-radius:20px;font-size:13px;font-weight:bold;text-decoration:none;animation:lightOnOff 1.2s infinite}
 @keyframes lightOnOff{0%,100%{box-shadow:0 0 0px #FF6B00,0 0 0px #FFB800;background:#FF6B00;transform:scale(1)}50%{box-shadow:0 0 18px #FF6B00,0 0 30px #FFB800,0 0 45px #FF6B00;background:#FF7A1A;transform:scale(1.05)}}
-
 .hero{background:linear-gradient(135deg,#0A4A8C,#0070C9);color:#fff;padding:24px 16px;text-align:center}
 .hero h1{font-size:26px;line-height:1.2}.hero h1 span{color:#FFB800}
 .hero p{font-size:13px;opacity:.9;margin:8px 0 14px}
 .search{max-width:500px;margin:0 auto;display:flex;background:#fff;border-radius:30px;overflow:hidden}
 .search input{flex:1;border:none;padding:13px 16px;outline:none;font-size:14px}
 .search button{background:#FF6B00;border:none;color:#fff;padding:0 18px;font-weight:bold;cursor:pointer}
-
-/* TYPING CURSOR */
 #cursor{animation:blink .9s infinite;font-weight:bold}
 @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
 #typingText{letter-spacing:.5px}
-
 .top-takealot{padding:14px 15px 0;text-align:center}
 .takealot-btn{background:linear-gradient(135deg,#0070C9,#00A3E0);color:#fff;border:none;padding:14px 28px;border-radius:30px;font-weight:900;font-size:16px;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,.2);display:inline-flex;align-items:center;gap:10px}
 .takealot-btn img{width:28px;height:28px;border-radius:50%;background:#fff}
@@ -41,12 +35,12 @@ header{background:#0A4A8C;color:#fff;padding:14px 16px;display:flex;align-items:
 .card img{width:100%;height:170px;object-fit:cover}
 .card-body{padding:14px}
 .badge{display:inline-block;background:#EAF3FF;color:#0A4A8C;font-size:11px;font-weight:bold;padding:4px 8px;border-radius:10px}
-.card h3{margin:8px 0 4px;font-size:17px}
+.card h3{margin:8px 0 4px;font-size:17px}.card h3 span{color:#FF6B00}
 .card p{font-size:13px;color:#666;line-height:1.5;margin:4px 0}
 .card .loc{font-size:12px;color:#888}
 .card .actions{display:flex;gap:8px;margin-top:12px}
 .btn{flex:1;text-align:center;padding:11px;border-radius:10px;font-weight:bold;font-size:13px;text-decoration:none}
-.btn-blue{background:#0A4A8C;color:#fff}.btn-green{background:#25D366;color:#fff}
+.btn-blue{background:#0A4A8C;color:#fff}.btn-orange{background:#FF6B00;color:#fff}.btn-green{background:#25D366;color:#fff}
 footer{text-align:center;padding:22px 15px;color:#888;font-size:12px;background:#fff}
 footer img{width:48px;height:48px;border-radius:50%;margin-bottom:8px}
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:999;overflow:auto}
@@ -72,17 +66,18 @@ footer img{width:48px;height:48px;border-radius:50%;margin-bottom:8px}
 
 <div class="hero">
   <h1>Discover Musina.<br><span>Shop Local. Shop Takealot.</span></h1>
-  <p style="font-size:15px;font-weight:600;color:#FFB800;min-height:22px"><span id="typingText"></span><span id="cursor">|</span></p>
-  <p style="font-size:12px;opacity:.8">TAHOR Tower • 2026 • Musina Ext 14, House No 5224</p>
+  <p style="font-size:15px;font-weight:600;color:#FFB800;min-height:22px;margin:8px 0 4px"><span id="typingText"></span><span id="cursor">|</span></p>
+  <p style="font-size:12px;opacity:.8;margin:0 0 14px">TAHOR Tower • 2026 • Musina Ext 14, House No 5224</p>
   <div class="search"><input id="searchInput" placeholder="Search business, shop, food..." onkeyup="filterBiz()"><button onclick="filterBiz()">Search</button></div>
 </div>
 
+<!-- TAKEALOT TOP BUTTON - WITH ICON PICTURE INSIDE -->
 <div class="top-takealot">
   <button class="takealot-btn" onclick="openTakealot()"><img src="takealot.jpg" alt="Takealot"> TAKEALOT - Shop Now Inside TAHOR</button>
   <p style="font-size:12px;color:#666;margin-top:6px">Big Retail Partner • Inside TAHOR • Retail Category</p>
 </div>
 
-<div class="categories">
+<div class="categories" id="catBar">
   <div class="cat active" onclick="setCat('all',this)">All</div>
   <div class="cat" onclick="setCat('food',this)">🍔 Food</div>
   <div class="cat" onclick="setCat('fashion',this)">👗 Fashion</div>
@@ -102,16 +97,23 @@ footer img{width:48px;height:48px;border-radius:50%;margin-bottom:8px}
   <p style="margin-top:8px;font-weight:bold;color:#0A4A8C">Designed by Musna Post System • 2026</p>
 </footer>
 
+<!-- TAKEALOT MINI PAGE MODAL - WITH PICTURE INSIDE -->
 <div id="takealotModal" class="modal">
   <div class="modal-inner">
     <div class="modal-head" style="background:#0070C9">
-      <h2>🛒 TAKEALOT</h2><p>Inside TAHOR • Retail • South Africa's Online Shop</p>
+      <h2>🛒 TAKEALOT</h2>
+      <p>Inside TAHOR • Retail • South Africa's Online Shop</p>
       <button class="close-btn" onclick="closeTakealot()">✕</button>
     </div>
     <img class="store-banner" src="takealot.jpg" alt="Takealot" onerror="this.src='https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=800&q=80'">
     <div style="padding:20px;text-align:center">
       <h3 style="color:#0B3A6B">Shop Everything on Takealot</h3>
       <p style="font-size:14px;color:#555;margin:10px 0;line-height:1.6">Electronics • Fashion • Home & Kitchen • Beauty • Toys & More<br>Delivered to Musina. Order through TAHOR.<br>📍 Musina Ext 14, House No 5224</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0">
+        <div style="background:#F0F7FF;padding:12px;border-radius:10px;font-size:13px;font-weight:bold">📱 Electronics</div>
+        <div style="background:#FFF0F0;padding:12px;border-radius:10px;font-size:13px;font-weight:bold">👗 Fashion</div>
+        <div style="background:#F0FFF4;padding:12px;border-radius:10px;font-size:13px;font-weight:bold">🏠 Home</div>
+      </div>
       <a href="https://www.takealot.com" target="_blank" style="display:block;background:#FF6B00;color:#fff;padding:14px;border-radius:12px;font-weight:bold;text-decoration:none;margin-top:10px">🛒 Shop on Takealot →</a>
       <a href="https://wa.me/27799073779?text=Hi%20TAHOR!%20I%20want%20to%20order%20from%20Takealot" target="_blank" class="wa-btn">📱 Order via WhatsApp (079 907 3779)</a>
       <p style="font-size:11px;color:#888;margin-top:10px">Takealot Partner Card • Retail • Inside TAHOR Tower • 2026 • Call 068 036 1133</p>
@@ -119,15 +121,44 @@ footer img{width:48px;height:48px;border-radius:50%;margin-bottom:8px}
   </div>
 </div>
 
+<!-- BUSINESS MODAL -->
 <div id="bizModal" class="modal"><div class="modal-inner" id="bizDetail"></div></div>
 
 <script>
 const businesses=[
-{name:"TAKEALOT",cat:"retail",rating:"5.0 ★",type:"Retail • Online Shopping • Big Company Partner",loc:"South Africa • Delivers to Musina • Ext 14 House 5224",desc:"Electronics, Fashion, Home, Beauty & More. South Africa's biggest online shop. Shop via TAHOR. Call 068 036 1133 / WhatsApp 079 907 3779 / 072 566 0255",img:"takealot.jpg",link:"https://www.takealot.com",open:"Open now • 24/7 Online"},
-{name:"Moonate Ko Kasi",cat:"food",rating:"4.9 ★",type:"Food • Kasi Flavour • Local Favourite",loc:"Musina Ext 14, House No 5224",desc:"Authentic Kasi food, tasty meals, fresh and affordable. Call 068 036 1133 or WhatsApp 079 907 3779 / 072 566 0255",img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80",link:"https://wa.me/27799073779?text=Hi%20Moonate%20Ko%20Kasi!%20I%20want%20to%20order",open:"Open now • 09:00 - 20:00"},
-{name:"Drip Musina",cat:"fashion",rating:"4.8 ★",type:"Fashion • Streetwear • Sneakers",loc:"Musina Town • Ext 14",desc:"Latest drip, streetwear, sneakers and fashion for the youth.",img:"https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80",link:"https://wa.me/27799073779?text=Hi%20Drip!%20I%20want%20to%20shop",open:"Open now • 09:00 - 18:00"},
-{name:"Musina Beauty Hub",cat:"beauty",rating:"4.9 ★",type:"Beauty • Hair • Nails",loc:"Musina • Limpopo",desc:"Hair, nails, makeup and beauty treatments. Book via WhatsApp 079 907 3779",img:"https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80",link:"https://wa.me/27799073779?text=Hi%20Beauty%20Hub!%20I%20want%20to%20book",open:"Open now • 08:00 - 18:00"},
-{name:"Quick Fix Services",cat:"services",rating:"4.7 ★",type:"Services • Repairs • Delivery",loc:"Musina • Limpopo",desc:"Phone repairs, delivery and general services in Musina. Call 068 036 1133",img:"https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80",link:"https://wa.me/27799073779?text=Hi%20Quick%20Fix!%20I%20need%20help",open:"Open now • 08:00 - 17:00"}
+{
+  name:"TAKEALOT",
+  cat:"retail",
+  rating:"5.0 ★",
+  type:"Retail • Online Shopping • Big Company Partner",
+  loc:"South Africa • Delivers to Musina • Ext 14 House 5224",
+  desc:"Electronics, Fashion, Home, Beauty & More. South Africa's biggest online shop. Shop via TAHOR - TAHOR helps you order as your Personal Shopper. Call 068 036 1133 / WhatsApp 079 907 3779 / 072 566 0255",
+  img:"takealot.jpg",
+  link:"https://www.takealot.com",
+  open:"Open now • 24/7 Online"
+},
+{
+  name:"Moonate Ko Kasi",
+  cat:"food",
+  rating:"4.9 ★",
+  type:"Food • Kasi Flavour • Local Favourite",
+  loc:"Musina Ext 14, House No 5224",
+  desc:"Authentic Kasi food, tasty meals, fresh and affordable. Call 068 036 1133 or WhatsApp 079 907 3779 / 072 566 0255",
+  img:"https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80",
+  link:"https://wa.me/27799073779?text=Hi%20Moonate%20Ko%20Kasi!%20I%20want%20to%20order",
+  open:"Open now • 09:00 - 20:00"
+},
+{
+  name:"Drip Musina",
+  cat:"fashion",
+  rating:"4.8 ★",
+  type:"Fashion • Streetwear • Sneakers",
+  loc:"Musina Town • Ext 14",
+  desc:"Latest drip, streetwear, sneakers and fashion for the youth.",
+  img:"https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80",
+  link:"https://wa.me/27799073779?text=Hi%20Drip!%20I%20want%20to%20shop",
+  open:"Open now • 09:00 - 18:00"
+}
 ];
 let currentCat='all';
 function renderBiz(){
@@ -164,7 +195,6 @@ function openBiz(i){
 function closeBiz(){document.getElementById('bizModal').classList.remove('open')}
 function openTakealot(){document.getElementById('takealotModal').classList.add('open')}
 function closeTakealot(){document.getElementById('takealotModal').classList.remove('open')}
-
 // TYPING - FIXED: Type slow -> Delete COMPLETELY immediately -> Start again immediately
 const textToType = "All business in one place.";
 let charIndex = 0;
