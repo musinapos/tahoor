@@ -113,7 +113,39 @@ footer a{color:#FFD9B0;text-decoration:none}
   <div class="cat preorder" onclick="window.location.href='pre-order.html'">🛒 TAHOR Pre-Order Cards</div>
 </div>
 
+<!-- TAKEALOT CARD - TOP -->
+<div class="section" style="padding-top:0;padding-bottom:0">
+  <div class="card" onclick="openTakealot()" style="cursor:pointer;border:2px solid #0070C9">
+    <img src="takealot.jpg" alt="Takealot" onerror="this.src='https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=800&q=80'">
+    <div class="card-body">
+      <span class="badge" style="background:#0070C9">RETAIL • BIG PARTNER</span>
+      <h3>TAKEALOT</h3>
+      <div class="stars">⭐⭐⭐⭐⭐ 5.0 ★</div>
+      <p>🕒 Open now • 24/7 Online<br>📍 South Africa • Delivers to Musina • Ext 14 House 5224<br>Electronics, Fashion, Home, Beauty & More. South Africa's biggest online shop. Shop via TAHOR — Personal Shopper. Call 068 036 1133 / WhatsApp 079 907 3779 / 072 566 0255</p>
+      <a class="btn" style="border-color:#0070C9;color:#0070C9" onclick="event.stopPropagation();openTakealot()">🛒 Shop Takealot →</a>
+    </div>
+  </div>
+</div>
+
 <div class="section"><h2>Featured Businesses</h2><div class="grid" id="businessGrid"></div></div>
+
+<div id="takealotModal" class="modal">
+  <div class="modal-inner">
+    <div class="modal-head" style="background:#0070C9">
+      <h2>🛒 TAKEALOT</h2>
+      <p>Inside TAHOR • Retail • South Africa's Online Shop</p>
+      <button class="close-btn" onclick="closeTakealot()">✕ Close</button>
+    </div>
+    <img class="store-banner" src="takealot.jpg" alt="Takealot" onerror="this.src='https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=800&q=80'">
+    <div style="padding:20px;text-align:center">
+      <h3 style="color:#0B3A6B">Shop Everything on Takealot</h3>
+      <p style="font-size:14px;color:#555;margin:10px 0;line-height:1.6">Electronics • Fashion • Home & Kitchen • Beauty • Toys & More<br>Delivered to Musina. Order through TAHOR.<br>📍 Musina Ext 14, House No 5224</p>
+      <a href="https://www.takealot.com" target="_blank" style="display:block;background:#FF6B00;color:#fff;padding:14px;border-radius:12px;font-weight:bold;text-decoration:none;margin-top:10px">🛒 Shop on Takealot →</a>
+      <a href="https://wa.me/27799073779?text=Hi%20TAHOR!%20I%20want%20to%20order%20from%20Takealot" target="_blank" class="wa-btn">📱 Order via WhatsApp (079 907 3779)</a>
+      <p style="font-size:11px;color:#888;margin-top:10px">Takealot Partner Card • Retail • Inside TAHOR Tower • 2026 • Call 068 036 1133</p>
+    </div>
+  </div>
+</div>
 
 <div id="bookModal" class="modal">
   <div class="modal-inner">
@@ -188,6 +220,7 @@ footer a{color:#FFD9B0;text-decoration:none}
 <script>
 let businesses=[
   {name:"MOONATE KO KASI",cat:"food",rating:"5.0 ★",type:"Fast Food • Delivery • Proudly Kasi",loc:"Musina, Central • 20-35 min delivery",desc:"Giant Rolls Box, Loaded Tower, Cheese Burger, Classic Burger. FREE delivery within 3km. Est 2023. Phone: 0799073779",img:"pic1.jpg",gallery:["pic2.jpg","pic3.jpg"],link:"https://musinapos.github.io/moonate-ko-kasi/",open:"Open now • 08:00-22:00"},
+  {name:"TAKEALOT",cat:"retail",rating:"5.0 ★",type:"Retail • Online Shopping • Big Company Partner",loc:"South Africa • Delivers to Musina • Ext 14 House 5224",desc:"Electronics, Fashion, Home, Beauty & More. South Africa's biggest online shop. Shop via TAHOR — Personal Shopper. Call 068 036 1133 / WhatsApp 079 907 3779 / 072 566 0255",img:"takealot.jpg",link:"https://www.takealot.com",open:"Open now • 24/7 Online"},
   {name:"TAHOR Kids Bookstore",cat:"bookstore",rating:"5.0 ★",type:"Kids Books • TAHOR Book • Read & Learn",loc:"Musina • Online • All South Africa",desc:"TAHOR Kids Book - Passion Over Laziness. Book 1 for kids 5-10. Inside the Bookstore mini-app. FREE for testing.",img:"pic4.jpg",open:"Open now • 24/7 Online",isBookstore:true},
 ];
 let currentCat='all';
@@ -196,7 +229,7 @@ function render(){
   let grid=document.getElementById('businessGrid');
   let filtered=businesses.filter(b=>(currentCat==='all'||b.cat===currentCat) && (b.name.toLowerCase().includes(q)||b.desc.toLowerCase().includes(q)));
   grid.innerHTML=filtered.map(b=>`
-    <div class="card"><img src="${b.img}">${b.gallery?`<div class="gallery"><img src="${b.gallery[0]}"><img src="${b.gallery[1]}"></div>`:''}<div class="card-body">
+    <div class="card" onclick="${b.name==='TAKEALOT'?'openTakealot()':''}"><img src="${b.img}">${b.gallery?`<div class="gallery"><img src="${b.gallery[0]}"><img src="${b.gallery[1]}"></div>`:''}<div class="card-body">
     <span class="badge ${b.cat==='bookstore'?'book':''}">${b.cat.toUpperCase()} • ${b.type}</span>
     <h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div>
     <p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p>
@@ -206,6 +239,8 @@ function setCat(cat,el){currentCat=cat;document.querySelectorAll('.cat').forEach
 function filterBusinesses(){render();}
 function openBookstore(){document.getElementById('bookModal').classList.add('open');document.body.style.overflow='hidden';}
 function closeBookstore(){document.getElementById('bookModal').classList.remove('open');document.body.style.overflow='auto';}
+function openTakealot(){document.getElementById('takealotModal').classList.add('open');document.body.style.overflow='hidden';}
+function closeTakealot(){document.getElementById('takealotModal').classList.remove('open');document.body.style.overflow='auto';}
 function selectPlan(p){document.getElementById('bPlan').value=p;document.getElementById('add').scrollIntoView({behavior:'smooth'});alert('You selected '+p+' — fill the form to join!');}
 function addBusiness(){
   let name=document.getElementById('bName').value,desc=document.getElementById('bDesc').value,loc=document.getElementById('bLoc').value,cat=document.getElementById('bCat').value;
@@ -239,7 +274,7 @@ function showPage(){
 }
 function nextPage(){ if(currentPage < pages.length-1){currentPage++; showPage();} }
 function prevPage(){ if(currentPage > 0){currentPage--; showPage();} }
-// TYPING - All businesses in one pot - rewrite itself again and again
+// TYPING - SLOWER NOW - 2x slower - All businesses in one pot
 const textToType = "All businesses in one pot";
 let charIndex = 0;
 let isDeleting = false;
@@ -251,10 +286,10 @@ function typeEffect(){
     el.textContent = textToType.substring(0, charIndex);
     if(charIndex === textToType.length){
       isDeleting = true;
-      setTimeout(typeEffect, 600);
+      setTimeout(typeEffect, 1200);
       return;
     }
-    setTimeout(typeEffect, 110);
+    setTimeout(typeEffect, 220); // was 110, now 220 = 2x slower
   } else {
     charIndex--;
     el.textContent = textToType.substring(0, charIndex);
@@ -263,7 +298,7 @@ function typeEffect(){
       setTimeout(typeEffect, 0);
       return;
     }
-    setTimeout(typeEffect, 30);
+    setTimeout(typeEffect, 60); // was 30, now 60 = 2x slower delete too
   }
 }
 typeEffect();
