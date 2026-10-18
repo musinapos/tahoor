@@ -10,7 +10,7 @@
 <meta property="og:image" content="icon.jpg">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif}
-:root{--blue:#0A4A8C;--dark:#0B3A6B;--orange:#FF6B00}
+:root{--blue:#0A4A8C;--dark:#0B3A6B;--orange:#FF6B00;--teal:#0F766E;--tealDark:#0B5E56}
 body{background:#fff;color:#222}
 header{background:var(--blue);color:#fff;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
 .logo{font-weight:900;font-size:28px;letter-spacing:1px;display:flex;align-items:center;gap:8px}
@@ -65,7 +65,7 @@ footer{background:var(--dark);color:#fff;padding:25px 15px;text-align:center;fon
 footer a{color:#FFD9B0;text-decoration:none}
 .gallery{display:flex;gap:5px;padding:5px 5px 0}
 .gallery img{width:50%;height:90px;object-fit:cover;border-radius:8px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;z-index:999;overflow-y:auto;padding:15px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;z-index:999;overflow-y:auto;padding:12px}
 .modal.open{display:block}
 .modal-inner{max-width:700px;margin:20px auto;background:#fff;border-radius:20px;overflow:hidden}
 .modal-head{background:#6C2BD9;color:#fff;padding:20px;text-align:center}
@@ -89,6 +89,28 @@ footer a{color:#FFD9B0;text-decoration:none}
 .reader-nav{display:flex;justify-content:space-between;gap:10px;margin-top:15px}
 .reader-nav button{flex:1;padding:12px;border:none;border-radius:10px;font-weight:bold;cursor:pointer;background:#6C2BD9;color:#fff}
 .reader-nav button:disabled{opacity:.4}
+.ta-hero{position:relative;height:280px;background:linear-gradient(180deg,rgba(0,0,0,0) 20%,rgba(11,94,86,.95) 70%),url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80');background-size:cover;background-position:center;padding:24px 20px 20px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff}
+.ta-hero h2{font-size:34px;line-height:1.05;font-weight:900;letter-spacing:-.5px}
+.ta-hero p{font-size:14px;margin-top:8px;line-height:1.4;opacity:.95}
+.ta-yellow{display:block;background:#FFC93C;color:#000;text-align:center;padding:14px;border-radius:8px;font-weight:900;font-size:17px;text-decoration:none;margin-top:14px}
+.ta-teal{background:var(--tealDark);padding:14px;border-radius:22px;margin:14px}
+.ta-trust{background:#0F766E;border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:space-between;color:#fff}
+.ta-trust-left{display:flex;gap:10px;align-items:center}
+.ta-trust-left b{font-size:19px;display:block}
+.ta-trust-left span{font-size:12px;opacity:.9}
+.ta-verified{background:#FFC93C;color:#000;font-weight:900;font-size:13px;padding:8px 14px;border-radius:8px}
+.ta-section-title{color:#fff;font-weight:900;font-size:22px;margin:16px 0 12px}
+.ta-shop{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.ta-shop a{background:#fff;border-radius:10px;text-align:center;padding:16px 4px 12px;text-decoration:none;color:#111;box-shadow:0 2px 8px rgba(0,0,0,.06);display:block}
+.ta-shop span{font-size:28px;display:block;margin-bottom:10px}
+.ta-shop b{font-size:12px}
+.ta-earn{background:#fff;border-radius:14px;padding:14px;display:flex;gap:14px;align-items:center;border-top:5px solid #FFC93C}
+.ta-earn img{width:90px;height:58px;object-fit:cover;border-radius:8px}
+.ta-earn h3{font-size:17px}
+.ta-earn p{font-size:12px;color:#555;line-height:1.4;margin:4px 0}
+.ta-earn a{color:#0F766E;font-weight:bold;font-size:13px;text-decoration:none}
+.ta-bottom{display:flex;gap:10px;padding:14px}
+.ta-bottom a{flex:1;text-align:center;padding:14px;border-radius:10px;font-weight:900;text-decoration:none;color:#fff}
 </style>
 </head>
 <body>
@@ -115,20 +137,48 @@ footer a{color:#FFD9B0;text-decoration:none}
 
 <div class="section"><h2>Featured Businesses</h2><div class="grid" id="businessGrid"></div></div>
 
-<div id="takealotModal" class="modal">
-  <div class="modal-inner">
-    <div class="modal-head" style="background:#0070C9">
-      <h2>🛒 TAKEALOT</h2>
-      <p>Inside TAHOR • Retail • South Africa's Online Shop</p>
-      <button class="close-btn" onclick="closeTakealot()">✕ Close</button>
+<!-- TAKEALOT - PICTURE STYLE - ALL BUTTONS WORK -->
+<div id="takealotModal" class="modal" onclick="if(event.target===this)closeTakealot()">
+  <div class="modal-inner" style="background:#fff">
+    <div style="background:#0F766E;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;color:#fff">
+      <b>TAHOR TOWER</b>
+      <button onclick="closeTakealot()" style="background:#fff;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer">✕ Close</button>
     </div>
-    <img class="store-banner" src="takealot.jpg" alt="Takealot" onerror="this.src='https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=800&q=80'">
-    <div style="padding:20px;text-align:center">
-      <h3 style="color:#0B3A6B">Shop Everything on Takealot</h3>
-      <p style="font-size:14px;color:#555;margin:10px 0;line-height:1.6">Electronics • Fashion • Home & Kitchen • Beauty • Toys & More<br>Delivered to Musina. Order through TAHOR.<br>📍 Musina Ext 14, House No 5224</p>
-      <a href="https://www.takealot.com" target="_blank" style="display:block;background:#FF6B00;color:#fff;padding:14px;border-radius:12px;font-weight:bold;text-decoration:none;margin-top:10px">🛒 Shop on Takealot →</a>
-      <a href="https://wa.me/27799073779?text=Hi%20TAHOR!%20I%20want%20to%20order%20from%20Takealot" target="_blank" class="wa-btn">📱 Order via WhatsApp (079 907 3779)</a>
-      <p style="font-size:11px;color:#888;margin-top:10px">Takealot Partner Card • Retail • Inside TAHOR Tower • 2026 • Call 068 036 1133</p>
+    <div class="ta-hero">
+      <h2>Shop on Takealot<br>& Earn Points</h2>
+      <p>Earn points on every Takealot order.<br>Redeem for vouchers, airtime, data & more.</p>
+      <a class="ta-yellow" href="https://www.takealot.com" target="_blank" rel="noopener">🛍️ Shop Now & Earn Points</a>
+    </div>
+    <div class="ta-teal">
+      <div class="ta-trust">
+        <div class="ta-trust-left">
+          <span style="font-size:26px">⭐</span>
+          <div><b>Trust Score 4.8</b><span>1.2k Reviews • Trusted by customers</span></div>
+        </div>
+        <span class="ta-verified">Verified</span>
+      </div>
+      <div class="ta-section-title">Shop</div>
+      <div class="ta-shop">
+        <a href="https://www.takealot.com/all?search=vouchers" target="_blank" rel="noopener"><span>🎟️</span><b>Vouchers</b></a>
+        <a href="https://www.takealot.com/all?search=airtime" target="_blank" rel="noopener"><span>📞</span><b>Airtime</b></a>
+        <a href="https://www.takealot.com/all?search=data" target="_blank" rel="noopener"><span>📊</span><b>Data</b></a>
+        <a href="https://www.takealot.com/all?search=electricity" target="_blank" rel="noopener"><span>⚡</span><b>Electricity</b></a>
+        <a href="https://www.takealot.com/all?search=dstv" target="_blank" rel="noopener"><span>📺</span><b>DStv</b></a>
+      </div>
+      <div class="ta-section-title">Earn</div>
+      <div class="ta-earn">
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80">
+        <div>
+          <h3>Earn with Credit Card</h3>
+          <p>Link your card to earn 2x points on every spend.</p>
+          <a href="https://www.takealot.com/credit-card" target="_blank" rel="noopener">Learn more →</a>
+        </div>
+      </div>
+      <div class="ta-bottom">
+        <a href="https://www.takealot.com" target="_blank" rel="noopener" style="background:#0A4A8C">🛒 Shop on Takealot</a>
+        <a href="https://wa.me/27799073779?text=Hi%20TAHOR!%20I%20want%20to%20order%20from%20Takealot%20and%20earn%20points" target="_blank" rel="noopener" style="background:#25D366">💬 WhatsApp Order</a>
+      </div>
+      <p style="text-align:center;color:#fff;font-size:12px;margin:0 0 8px">📍 Musina Ext 14, House 5224 • WhatsApp 079 907 3779 • Call 068 036 1133</p>
     </div>
   </div>
 </div>
@@ -206,7 +256,7 @@ footer a{color:#FFD9B0;text-decoration:none}
 <script>
 let businesses=[
   {name:"MOONATE KO KASI",cat:"food",rating:"5.0 ★",type:"Fast Food • Delivery • Proudly Kasi",loc:"Musina, Central • 20-35 min delivery",desc:"Giant Rolls Box, Loaded Tower, Cheese Burger, Classic Burger. FREE delivery within 3km. Est 2023. Phone: 0799073779",img:"pic1.jpg",gallery:["pic2.jpg","pic3.jpg"],link:"https://musinapos.github.io/moonate-ko-kasi/",open:"Open now • 08:00-22:00"},
-  {name:"TAKEALOT",cat:"retail",rating:"5.0 ★",type:"Retail • Online Shopping • Big Company Partner",loc:"South Africa • Delivers to Musina • Ext 14 House 5224",desc:"Electronics, Fashion, Home, Beauty & More. South Africa's biggest online shop. Shop via TAHOR — Personal Shopper. Call 068 036 1133 / WhatsApp 079 907 3779 / 072 566 0255",img:"takealot.jpg",link:"https://www.takealot.com",open:"Open now • 24/7 Online"},
+  {name:"TAKEALOT",cat:"retail",rating:"4.8 ★",type:"Retail • Shop & Earn Points",loc:"South Africa • Delivers to Musina",desc:"Shop on Takealot & Earn Points. Vouchers, Airtime, Data, Electricity & DStv. 1.2k Reviews • Verified.",img:"takealot.jpg",link:"https://www.takealot.com",open:"Open now • 24/7 Online"},
   {name:"TAHOR Kids Bookstore",cat:"bookstore",rating:"5.0 ★",type:"Kids Books • TAHOR Book • Read & Learn",loc:"Musina • Online • All South Africa",desc:"TAHOR Kids Book - Passion Over Laziness. Book 1 for kids 5-10. Inside the Bookstore mini-app. FREE for testing.",img:"pic4.jpg",open:"Open now • 24/7 Online",isBookstore:true},
 ];
 let currentCat='all';
@@ -214,12 +264,22 @@ function render(){
   let q=document.getElementById('searchInput').value.toLowerCase();
   let grid=document.getElementById('businessGrid');
   let filtered=businesses.filter(b=>(currentCat==='all'||b.cat===currentCat) && (b.name.toLowerCase().includes(q)||b.desc.toLowerCase().includes(q)));
-  grid.innerHTML=filtered.map(b=>`
-    <div class="card" onclick="${b.name==='TAKEALOT'?'openTakealot()':''}"><img src="${b.img}">${b.gallery?`<div class="gallery"><img src="${b.gallery[0]}"><img src="${b.gallery[1]}"></div>`:''}<div class="card-body">
+  grid.innerHTML=filtered.map(b=>{
+    if(b.name==='TAKEALOT'){
+      return `<div class="card"><img src="${b.img}" onclick="openTakealot()" style="cursor:pointer"><div class="card-body">
+      <span class="badge">RETAIL • ${b.type}</span>
+      <h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div>
+      <p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p>
+      <a class="btn" onclick="openTakealot()">Shop Now & Earn Points →</a>
+      <a class="btn" href="https://www.takealot.com" target="_blank" rel="noopener" style="margin-top:8px;background:#0A4A8C;color:#fff;border-color:#0A4A8C">Visit Takealot.com ↗</a>
+      </div></div>`;
+    }
+    return `<div class="card"><img src="${b.img}">${b.gallery?`<div class="gallery"><img src="${b.gallery[0]}"><img src="${b.gallery[1]}"></div>`:''}<div class="card-body">
     <span class="badge ${b.cat==='bookstore'?'book':''}">${b.cat.toUpperCase()} • ${b.type}</span>
     <h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div>
     <p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p>
-    ${b.isBookstore?`<a class="btn book" onclick="openBookstore()">📚 Open Bookstore →</a>`:`<a href="${b.link||'#'}" class="btn">View Details →</a>`}</div></div>`).join('') || '<p style="text-align:center">No businesses found. Try another search.</p>';
+    ${b.isBookstore?`<a class="btn book" onclick="openBookstore()">📚 Open Bookstore →</a>`:`<a href="${b.link||'#'}" class="btn" target="_blank" rel="noopener">View Details →</a>`}</div></div>`;
+  }).join('') || '<p style="text-align:center">No businesses found. Try another search.</p>';
 }
 function setCat(cat,el){currentCat=cat;document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));el.classList.add('active');render();}
 function filterBusinesses(){render();}
@@ -260,7 +320,6 @@ function showPage(){
 }
 function nextPage(){ if(currentPage < pages.length-1){currentPage++; showPage();} }
 function prevPage(){ if(currentPage > 0){currentPage--; showPage();} }
-// TYPING - SLOWER NOW - 2x slower - All businesses in one pot
 const textToType = "All businesses in one pot";
 let charIndex = 0;
 let isDeleting = false;
