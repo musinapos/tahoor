@@ -29,15 +29,19 @@ nav a{color:#fff;text-decoration:none}
 .meta{font-size:12px;margin-top:10px;color:#555}
 #cursor{animation:blink .9s infinite;font-weight:bold;color:var(--dark)}
 @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
-.categories{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;padding:22px 15px}
-.cat{padding:18px 28px;border-radius:30px;border:3px solid rgba(255,255,255,.6);cursor:pointer;font-weight:900;font-size:15px;color:#fff;box-shadow:0 6px 16px rgba(0,0,0,.25);display:flex;align-items:center;gap:8px}
-.cat.active{transform:scale(1.05);outline:3px solid #fff;outline-offset:2px}
+
+/* === BUTTONS 3x2 GRID - BROAD, NOT DOWN === */
+.categories{display:grid;grid-template-columns:repeat(3, 1fr);gap:10px;padding:16px 12px;max-width:800px;margin:auto}
+.cat{padding:16px 6px;border-radius:20px;border:3px solid rgba(255,255,255,.6);cursor:pointer;font-weight:900;font-size:13px;color:#fff;box-shadow:0 6px 16px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;gap:6px;text-align:center;min-height:60px}
+.cat.active{transform:scale(1.03);outline:3px solid #fff;outline-offset:2px}
 .cat.food{background:linear-gradient(135deg,#FF6B00,#FF8A3D)}
 .cat.retail{background:linear-gradient(135deg,#EC4899,#F472B6)}
 .cat.services{background:linear-gradient(135deg,#0F766E,#14B8A6)}
 .cat.book{background:linear-gradient(135deg,#6C2BD9,#9B5CFF)}
 .cat.preorder{background:linear-gradient(135deg,#0b5e2f,#25D366)}
 .cat.parts{background:linear-gradient(135deg,#0A4A8C,#2D7BFF)}
+@media(max-width:500px){.cat{font-size:12px;padding:14px 4px}}
+
 .section{max-width:1100px;margin:auto;padding:10px 15px 30px}
 .section h2{text-align:center;color:var(--dark);font-size:24px;margin:10px 0}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:20px}
@@ -123,7 +127,7 @@ footer a{color:#FFD9B0;text-decoration:none}
 
 <header>
   <div class="logo"><img src="icon.jpg" style="width:38px;height:38px;border-radius:50%;object-fit:cover;"><div>TA<span>HOR</span><small>BUSINESSES MARKETING PLATFORM</small></div></div>
-  <nav><a href="#">Home</a><a href="#businesses">Businesses</a><a href="#pricing">Pricing</a><a href="#">About</a><a href="#">Contact</a><a href="#add" class="cta">Add Your Business in the Pot</a></nav>
+  <nav><a href="#" onclick="goBackHome();return false">Home</a><a href="#businesses">Businesses</a><a href="#pricing">Pricing</a><a href="#">About</a><a href="#">Contact</a><a href="#add" class="cta">Add Your Business in the Pot</a></nav>
 </header>
 
 <div class="hero">
@@ -133,38 +137,47 @@ footer a{color:#FFD9B0;text-decoration:none}
   <div class="meta">📍 Located in Musina • Limpopo • South Africa • 100+ businesses listed</div>
 </div>
 
+<!-- === BUTTONS 3x2 - BROAD === -->
 <div class="categories" id="businesses">
-  <div class="cat food active" onclick="setCat('all',this)">🍔 Food</div>
+  <div class="cat food" onclick="setCat('food',this)">🍔 Food</div>
   <div class="cat retail" onclick="setCat('retail',this)">🛍️ Retail</div>
   <div class="cat services" onclick="setCat('services',this)">🔧 Services</div>
-  <div class="cat book" onclick="setCat('bookstore',this)">📚 TAHOR Kids Bookstore</div>
-  <div class="cat parts" onclick="setCat('carparts',this)">🚗 Used Car Parts</div>
-  <div class="cat preorder" onclick="window.location.href='pre-order.html'">🛒 TAHOR Pre-Order Cards</div>
+  <div class="cat book" onclick="setCat('bookstore',this)">📚 Bookstore</div>
+  <div class="cat parts" onclick="setCat('carparts',this)">🚗 Car Parts</div>
+  <div class="cat preorder" onclick="window.location.href='pre-order.html'">🛒 Pre-Order</div>
 </div>
 
-<div class="section"><h2>Featured Businesses</h2>
-  <div class="parts-bar" id="partsFilterBar" style="display:none">
-    <select id="makeFilter" onchange="render()"><option value="ALL">All Cars</option><option>Toyota</option><option>Other</option></select>
-    <button onclick="togglePartsAdmin()">🔒 + ADD / EDIT PRICES (Owner Only)</button>
-    <span style="font-size:12px;color:#666;align-self:center">Only ACTIVE parts show to customers</span>
+<!-- MAIN PAGE SECTION - HIDDEN WHEN INSIDE -->
+<div id="mainPage">
+  <div class="section"><h2>Featured Businesses</h2><div class="grid" id="mainGrid"></div></div>
+</div>
+
+<!-- INSIDE PAGE - SHOWS WHEN YOU TAP A BUTTON -->
+<div id="insidePage" style="display:none">
+  <div class="section">
+    <button onclick="goBackHome()" style="background:#0A4A8C;color:#fff;border:none;padding:10px 18px;border-radius:20px;font-weight:bold;cursor:pointer;margin-bottom:12px">⬅️ Back to TAHOR Home</button>
+    <h2 id="insideTitle">Inside</h2>
+    <div class="parts-bar" id="partsFilterBar" style="display:none">
+      <select id="makeFilter" onchange="render()"><option value="ALL">All Cars</option><option>Toyota</option><option>Other</option></select>
+      <button onclick="togglePartsAdmin()">🔒 + ADD / EDIT PRICES (Owner Only)</button>
+      <span style="font-size:12px;color:#666;align-self:center">Only ACTIVE parts show to customers</span>
+    </div>
+    <div class="grid" id="businessGrid"></div>
   </div>
-  <div class="grid" id="businessGrid"></div>
-</div>
-
-<!-- PARTS ADMIN - OWNER ONLY -->
-<div id="partsAdmin" class="section" style="display:none">
-  <div class="form-wrap" style="border:2px solid #0A4A8C">
-    <h3 style="color:#0B3A6B;text-align:center">OWNER - Add / Edit Corolla Parts</h3>
-    <p style="font-size:12px;color:#666;text-align:center">PIN 5224 protected. Only you can edit.</p>
-    <input id="pName" placeholder="Part Name e.g. 1.6 Corolla Block">
-    <select id="pMake"><option>Toyota</option></select>
-    <input id="pModel" placeholder="Car Model & Year e.g. Toyota Corolla 1.6">
-    <input id="pPrice" type="number" placeholder="Price e.g. 8500">
-    <input id="pQty" type="number" placeholder="Quantity e.g. 3">
-    <input id="pImg" placeholder="Photo name e.g. block.jpg or image link">
-    <select id="pCond"><option>Used - Good Condition</option><option>Used - Very Good</option><option>Used - Fair</option><option>For Spares</option></select>
-    <select id="pActive"><option value="1">✅ ACTIVE - Show in shop (I have it)</option><option value="0">❌ NOT ACTIVE - Hide (I don't have it)</option></select>
-    <button onclick="addPart()">SAVE PART</button>
+  <div id="partsAdmin" class="section" style="display:none">
+    <div class="form-wrap" style="border:2px solid #0A4A8C">
+      <h3 style="color:#0B3A6B;text-align:center">OWNER - Add / Edit Corolla Parts</h3>
+      <p style="font-size:12px;color:#666;text-align:center">PIN 5224 protected. Only you can edit.</p>
+      <input id="pName" placeholder="Part Name e.g. 1.6 Corolla Block">
+      <select id="pMake"><option>Toyota</option></select>
+      <input id="pModel" placeholder="Car Model & Year e.g. Toyota Corolla 1.6">
+      <input id="pPrice" type="number" placeholder="Price e.g. 8500">
+      <input id="pQty" type="number" placeholder="Quantity e.g. 3">
+      <input id="pImg" placeholder="Photo name e.g. block.jpg or image link">
+      <select id="pCond"><option>Used - Good Condition</option><option>Used - Very Good</option><option>Used - Fair</option><option>For Spares</option></select>
+      <select id="pActive"><option value="1">✅ ACTIVE - Show in shop (I have it)</option><option value="0">❌ NOT ACTIVE - Hide (I don't have it)</option></select>
+      <button onclick="addPart()">SAVE PART</button>
+    </div>
   </div>
 </div>
 
@@ -289,11 +302,8 @@ let businesses=[
   {name:"TAKEALOT",cat:"retail",rating:"4.8 ★",type:"Retail • Shop & Earn Points",loc:"South Africa • Delivers to Musina",desc:"Shop on Takealot & Earn Points. Vouchers, Airtime, Data, Electricity & DStv. 1.2k Reviews • Verified.",img:"https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=600&q=80",link:"https://www.takealot.com",open:"Open now • 24/7 Online"},
   {name:"TAHOR Kids Bookstore",cat:"bookstore",rating:"5.0 ★",type:"Kids Books • TAHOR Book • Read & Learn",loc:"Musina • Online • All South Africa",desc:"TAHOR Kids Book - Passion Over Laziness. Book 1 for kids 5-10. Inside the Bookstore mini-app. FREE for testing.",img:"pic4.jpg",open:"Open now • 24/7 Online",isBookstore:true},
 ];
-
-// === COROLLA ONLY - YOUR STOCK ===
 let ADMIN_PIN = "5224";
 let isEditor = false;
-
 let parts = JSON.parse(localStorage.getItem('tahor_parts')||'null');
 if(!parts){
   parts=[
@@ -302,56 +312,66 @@ if(!parts){
   ];
   localStorage.setItem('tahor_parts', JSON.stringify(parts));
 }
-
 let currentCat='all';
 function saveParts(){ localStorage.setItem('tahor_parts', JSON.stringify(parts)); }
 
+function renderMain(){
+  let grid=document.getElementById('mainGrid');
+  if(!grid) return;
+  grid.innerHTML=businesses.map(b=>{
+    if(b.name==='TAKEALOT'){
+      return `<div class="card"><img src="${b.img}" onclick="openTakealot()" style="cursor:pointer"><div class="card-body"><span class="badge">RETAIL • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="openTakealot()">Shop Now & Earn Points →</a></div></div>`;
+    }
+    return `<div class="card"><img src="${b.img}">${b.gallery?`<div class="gallery"><img src="${b.gallery[0]}"><img src="${b.gallery[1]}"></div>`:''}<div class="card-body"><span class="badge ${b.cat==='bookstore'?'book':''}">${b.cat.toUpperCase()} • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p>${b.isBookstore?`<a class="btn book" onclick="openBookstore()">📚 Open Bookstore →</a>`:`<a href="${b.link||'#'}" class="btn" target="_blank" rel="noopener">View Details →</a>`}</div></div>`;
+  }).join('');
+}
 function render(){
   let q=document.getElementById('searchInput').value.toLowerCase();
   let grid=document.getElementById('businessGrid');
-  document.getElementById('partsFilterBar').style.display = currentCat==='carparts' ? 'flex' : 'none';
+  if(!grid) return;
+  let filterBar=document.getElementById('partsFilterBar');
+  if(filterBar) filterBar.style.display = currentCat==='carparts' ? 'flex' : 'none';
   if(currentCat==='carparts'){
     let make=document.getElementById('makeFilter').value;
     let activeParts=parts.filter(p=>p.active==1 && (make==='ALL'||p.make===make) && (p.name.toLowerCase().includes(q)||p.model.toLowerCase().includes(q)));
     if(activeParts.length===0){ grid.innerHTML='<p style="text-align:center;padding:30px;background:#fff;border-radius:12px">No parts available right now.<br><small>Check back later — new parts coming soon.</small></p>'; return; }
     grid.innerHTML=activeParts.map(p=>{
       let realIdx=parts.indexOf(p);
-      return `<div class="card"><img src="${p.img}" onerror="this.src='https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80'"><div class="card-body">
-      <span class="badge parts">USED CAR PART • ${p.make} • ${p.cond}</span>
-      <h3>${p.name}</h3><div class="stars">⭐⭐⭐⭐⭐ 4.8 ★</div>
-      <p>🚗 Car: ${p.model}<br>📍 Musina Ext 14<br>Condition: ${p.cond}<br>🧹 ${p.note||''}<br>📦 Qty: <b>${p.qty} in stock</b></p>
-      <p style="font-size:22px;font-weight:900;color:#0B3A6B">R${p.price.toLocaleString()}</p>
-      <a class="btn" style="background:#25D366;color:#fff;border-color:#25D366" href="https://wa.me/27799073779?text=Hi%20TAHOR!%20I%20want%20${encodeURIComponent(p.name)}%20R${p.price}" target="_blank">💬 WhatsApp to Order</a>
-      ${isEditor ? `<button class="btn" onclick="editPrice(${realIdx})">✏️ Edit Price - R${p.price}</button>
-      <button class="btn" onclick="editQty(${realIdx})">✏️ Edit Qty - ${p.qty} left</button>
-      <button class="btn" onclick="toggleActive(${realIdx})">Hide / Not Active</button>` : ''}
-      </div></div>`;
+      return `<div class="card"><img src="${p.img}" onerror="this.src='https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80'"><div class="card-body"><span class="badge parts">USED CAR PART • ${p.make} • ${p.cond}</span><h3>${p.name}</h3><div class="stars">⭐⭐⭐⭐⭐ 4.8 ★</div><p>🚗 Car: ${p.model}<br>📍 Musina Ext 14<br>Condition: ${p.cond}<br>🧹 ${p.note||''}<br>📦 Qty: <b>${p.qty} in stock</b></p><p style="font-size:22px;font-weight:900;color:#0B3A6B">R${p.price.toLocaleString()}</p><a class="btn" style="background:#25D366;color:#fff;border-color:#25D366" href="https://wa.me/27799073779?text=Hi%20TAHOR!%20I%20want%20${encodeURIComponent(p.name)}%20R${p.price}" target="_blank">💬 WhatsApp to Order</a>${isEditor ? `<button class="btn" onclick="editPrice(${realIdx})">✏️ Edit Price - R${p.price}</button><button class="btn" onclick="editQty(${realIdx})">✏️ Edit Qty - ${p.qty} left</button><button class="btn" onclick="toggleActive(${realIdx})">Hide / Not Active</button>` : ''}</div></div>`;
     }).join(''); return;
   }
   let filtered=businesses.filter(b=>(currentCat==='all'||b.cat===currentCat) && (b.name.toLowerCase().includes(q)||b.desc.toLowerCase().includes(q)));
   grid.innerHTML=filtered.map(b=>{
     if(b.name==='TAKEALOT'){
-      return `<div class="card"><img src="${b.img}" onclick="openTakealot()" style="cursor:pointer"><div class="card-body">
-      <span class="badge">RETAIL • ${b.type}</span>
-      <h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div>
-      <p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p>
-      <a class="btn" onclick="openTakealot()">Shop Now & Earn Points →</a>
-      <a class="btn" href="https://www.takealot.com" target="_blank" rel="noopener" style="margin-top:8px;background:#0A4A8C;color:#fff;border-color:#0A4A8C">Visit Takealot.com ↗</a>
-      </div></div>`;
+      return `<div class="card"><img src="${b.img}" onclick="openTakealot()" style="cursor:pointer"><div class="card-body"><span class="badge">RETAIL • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="openTakealot()">Shop Now & Earn Points →</a><a class="btn" href="https://www.takealot.com" target="_blank" rel="noopener" style="margin-top:8px;background:#0A4A8C;color:#fff;border-color:#0A4A8C">Visit Takealot.com ↗</a></div></div>`;
     }
-    return `<div class="card"><img src="${b.img}">${b.gallery?`<div class="gallery"><img src="${b.gallery[0]}"><img src="${b.gallery[1]}"></div>`:''}<div class="card-body">
-    <span class="badge ${b.cat==='bookstore'?'book':''}">${b.cat.toUpperCase()} • ${b.type}</span>
-    <h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div>
-    <p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p>
-    ${b.isBookstore?`<a class="btn book" onclick="openBookstore()">📚 Open Bookstore →</a>`:`<a href="${b.link||'#'}" class="btn" target="_blank" rel="noopener">View Details →</a>`}</div></div>`;
+    return `<div class="card"><img src="${b.img}">${b.gallery?`<div class="gallery"><img src="${b.gallery[0]}"><img src="${b.gallery[1]}"></div>`:''}<div class="card-body"><span class="badge ${b.cat==='bookstore'?'book':''}">${b.cat.toUpperCase()} • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p>${b.isBookstore?`<a class="btn book" onclick="openBookstore()">📚 Open Bookstore →</a>`:`<a href="${b.link||'#'}" class="btn" target="_blank" rel="noopener">View Details →</a>`}</div></div>`;
   }).join('') || '<p style="text-align:center">No businesses found. Try another search.</p>';
+}
+function setCat(cat,el){
+  currentCat=cat;
+  document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));
+  if(el) el.classList.add('active');
+  // GO INSIDE
+  document.getElementById('mainPage').style.display='none';
+  document.getElementById('insidePage').style.display='block';
+  document.getElementById('insideTitle').innerText = el ? el.innerText + ' — Inside TAHOR' : 'Inside TAHOR';
+  render();
+  window.scrollTo(0,0);
+}
+function goBackHome(){
+  document.getElementById('mainPage').style.display='block';
+  document.getElementById('insidePage').style.display='none';
+  document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));
+  currentCat='all';
+  renderMain();
+  window.scrollTo(0,0);
 }
 function togglePartsAdmin(){
   if(!isEditor){
     let pin = prompt("Editor Only - Enter PIN (Owner Only):");
     if(pin !== ADMIN_PIN){ alert("Wrong PIN - Only TAHOR owner can edit"); return; }
-    isEditor = true;
-    alert("Welcome boss - You are now Editor. You can edit prices.");
+    isEditor = true; alert("Welcome boss - You are now Editor. You can edit prices.");
   }
   let p=document.getElementById('partsAdmin');
   p.style.display=p.style.display==='none'?'block':'none';
@@ -364,32 +384,20 @@ function addPart(){
   parts.push({name:n,make:mk,model:mo,price:parseFloat(pr),qty:parseInt(qty)||1,img:img||'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80',cond:cond,active:parseInt(act),note:"Needs cleaning before collection - cleaned on order"});
   saveParts(); render();
   document.getElementById('pName').value=''; document.getElementById('pPrice').value='';
-  alert('Part saved in YOUR colour! It shows only if ACTIVE.');
+  alert('Part saved! It shows only if ACTIVE.');
 }
-function toggleActive(idx){
-  parts[idx].active = parts[idx].active ? 0 : 1;
-  saveParts(); render();
-}
+function toggleActive(idx){ parts[idx].active = parts[idx].active ? 0 : 1; saveParts(); render(); }
 function editPrice(idx){
   if(!isEditor) return alert("Only editor can edit price");
   let newPrice = prompt("New price for " + parts[idx].name + " (Current R" + parts[idx].price + "):", parts[idx].price);
-  if(newPrice && !isNaN(newPrice)){
-    parts[idx].price = parseFloat(newPrice);
-    saveParts(); render();
-    alert("Price updated to R" + newPrice);
-  }
+  if(newPrice && !isNaN(newPrice)){ parts[idx].price = parseFloat(newPrice); saveParts(); render(); alert("Price updated to R" + newPrice); }
 }
 function editQty(idx){
   if(!isEditor) return;
   let newQty = prompt("How many " + parts[idx].name + " do you have now?", parts[idx].qty);
-  if(newQty !== null){
-    parts[idx].qty = parseInt(newQty);
-    if(parts[idx].qty <= 0) parts[idx].active = 0;
-    saveParts(); render();
-  }
+  if(newQty !== null){ parts[idx].qty = parseInt(newQty); if(parts[idx].qty <= 0) parts[idx].active = 0; saveParts(); render(); }
 }
-function setCat(cat,el){currentCat=cat;document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));el.classList.add('active');render();}
-function filterBusinesses(){render();}
+function filterBusinesses(){ if(document.getElementById('insidePage').style.display==='block'){render();} else {renderMain();} }
 function openBookstore(){document.getElementById('bookModal').classList.add('open');document.body.style.overflow='hidden';}
 function closeBookstore(){document.getElementById('bookModal').classList.remove('open');document.body.style.overflow='auto';}
 function openTakealot(){document.getElementById('takealotModal').classList.add('open');document.body.style.overflow='hidden';}
@@ -399,9 +407,10 @@ function addBusiness(){
   let name=document.getElementById('bName').value,desc=document.getElementById('bDesc').value,loc=document.getElementById('bLoc').value,cat=document.getElementById('bCat').value;
   if(!name){alert('Please enter business name');return;}
   businesses.push({name,cat,rating:"New",type:"Local Business",loc:loc||"Musina",desc:desc||"New business in Musina",img:"https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80",open:"Open now"});
-  render();document.getElementById('msg').innerText='✅ '+name+' added successfully! It now appears on the platform.';
+  renderMain();document.getElementById('msg').innerText='✅ '+name+' added successfully! It now appears on the platform.';
   document.getElementById('bName').value='';
 }
+renderMain();
 render();
 let pages=[
   {img:"pic5.jpg",title:"Cover — Passion Over Laziness",text:"By TAHOR Kids • Age 5-10 • English<br>Passion is doing what you love, even when it's hard. Laziness is waiting for tomorrow."},
