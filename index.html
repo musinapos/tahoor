@@ -132,6 +132,11 @@ footer a{color:#FFD9B0;text-decoration:none}
 .jj-day.dis{background:#111827;color:#475569;text-decoration:line-through}
 .jj-day.sel{background:#22c55e;color:#000;font-weight:900}
 .jj-btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:900;margin-top:8px;cursor:pointer}
+/* MUSTOWN UBER INSIDE TAHOR */
+.mu-wrap{background:#0f172a;color:#fff;border-radius:18px;padding:16px;margin-top:12px}
+.mu-wrap input,.mu-wrap select,.mu-wrap textarea{width:100%;padding:11px;margin:7px 0;border-radius:10px;border:1px solid #334155;background:#fff;color:#000}
+.mu-driver{display:flex;gap:10px;align-items:center;background:#f8fafc;color:#000;padding:10px;border-radius:10px;margin-top:8px}
+.mu-driver img{width:50px;height:50px;border-radius:50%;object-fit:cover;background:#cbd5e1}
 </style>
 </head>
 <body>
@@ -180,7 +185,6 @@ footer a{color:#FFD9B0;text-decoration:none}
         <div class="jj-card" onclick="jjOpen('garden')"><img src="garden.jpg"><div><b>GARDEN</b><br><small>From R300</small></div></div>
         <div class="jj-card" style="grid-column:1/-1" onclick="jjOpen('spring')"><img src="spring.jpg"><div><b>SPRING CLEANING</b><br><small>From R450 • Windows Included</small></div></div>
       </div>
-
       <div id="jj-jojo" class="jj-room">
         <span style="color:#38bdf8;cursor:pointer" onclick="jjBack()">← Back</span>
         <h3>JOJO TANK CLEANING</h3><p style="font-size:13px;color:#94a3b8">1000L R350 • 2500L R550 • 5000L R850 • 10000L R1200</p>
@@ -188,7 +192,6 @@ footer a{color:#FFD9B0;text-decoration:none}
         <button class="jj-btn" style="background:#22c55e" onclick="jjBook('JoJo Tank','jojo')">✅ Confirm Booking</button>
         <button class="jj-btn" style="background:#f59e0b" onclick="jjPay('JoJo Tank')">💳 Pay Online Now</button>
       </div>
-
       <div id="jj-garden" class="jj-room">
         <span style="color:#38bdf8;cursor:pointer" onclick="jjBack()">← Back</span>
         <h3>GARDEN SERVICE</h3><p style="font-size:13px;color:#94a3b8">Small R300 • Medium R450 • Large R650</p>
@@ -196,7 +199,6 @@ footer a{color:#FFD9B0;text-decoration:none}
         <button class="jj-btn" style="background:#22c55e" onclick="jjBook('Garden Service','garden')">✅ Confirm Booking</button>
         <button class="jj-btn" style="background:#f59e0b" onclick="jjPay('Garden Service')">💳 Pay Online Now</button>
       </div>
-
       <div id="jj-spring" class="jj-room">
         <span style="color:#38bdf8;cursor:pointer" onclick="jjBack()">← Back</span>
         <h3>SPRING CLEANING</h3><p style="font-size:13px;color:#94a3b8">Spring R450 • Window Cleaning R450 Included • High Windows R250</p>
@@ -208,6 +210,39 @@ footer a{color:#FFD9B0;text-decoration:none}
         <button class="jj-btn" style="background:#fff" onclick="window.open('https://wa.me/27763574601?text=Hi JJ TEAM I need Spring','_blank')">💬 WhatsApp 0763574601</button>
       </div>
     </div>
+
+    <!-- MUSTOWN UBER INSIDE TAHOR - MUSINA ONLY -->
+    <div id="muInside" style="display:none" class="mu-wrap">
+      <div style="text-align:center">
+        <img src="logo.png" onerror="this.style.display='none'" style="width:80px;height:80px;object-fit:cover;border-radius:18px;background:#fff">
+        <div style="font-size:50px">🚕</div>
+        <h2 style="color:#fff">MUSTOWN UBER</h2>
+        <p style="font-size:12px;opacity:.8">Mustown • Musina • DAVIS 0763584601</p>
+      </div>
+      <div style="background:#fff;color:#000;border-radius:14px;padding:14px;margin-top:12px">
+        <h3 style="text-align:center">🚕 Request a Ride - Musina</h3>
+        <label>Your Name</label><input id="mu-name" placeholder="e.g. Thabo">
+        <label>Phone</label><input id="mu-phone" placeholder="e.g. 078 123 4567">
+        <label>Pickup Location</label><input id="mu-pickup" value="Mustown, Musina">
+        <label>Destination</label><input id="mu-dest" placeholder="e.g. Musina CBD, Nancefield, Ext 14, Musina Hospital">
+        <label>Passengers</label>
+        <select id="mu-pass"><option value="1">1 Passenger</option><option value="2">2 Passengers</option><option value="3">3 Passengers</option><option value="4">4 Passengers</option><option value="5">5 Passengers</option><option value="6">6 Passengers</option><option value="7">7 Passengers</option></select>
+        <label>Notes</label><textarea id="mu-notes" rows="2" placeholder="Any extra info..."></textarea>
+        <button class="jj-btn" style="background:#16a34a;color:#fff;font-size:18px" onclick="muQuote()">🚕 Request Uber Now</button>
+        <div id="mu-quote" style="display:none;margin-top:10px;background:#f1f5f9;padding:12px;border-radius:10px"><b id="mu-quoteText"></b><br><span id="mu-total" style="font-size:20px;font-weight:900"></span><br><button class="jj-btn" style="background:#16a34a;color:#fff" onclick="muConfirm()">✅ Confirm & Send WhatsApp</button></div>
+      </div>
+      <div style="background:#fff;color:#000;border-radius:14px;padding:14px;margin-top:12px">
+        <h3 style="text-align:center">Our Drivers <span style="color:#16a34a">● LIVE</span> - Musina</h3>
+        <p style="text-align:center;font-size:12px;color:#64748b" id="mu-debug">Loading from Firebase...</p>
+        <div id="mu-drivers"></div>
+      </div>
+      <div style="background:#fff;color:#000;border-radius:14px;padding:14px;margin-top:12px;text-align:center">
+        <h3>🚗 Driver Login</h3><p style="font-size:13px;color:#64748b">DAVIS 0763584601 • John 0725660255</p>
+        <input id="mu-driverName" placeholder="Driver Name e.g. DAVIS">
+        <button class="jj-btn" style="background:#0f172a;color:#fff" onclick="alert('Driver logged in: '+document.getElementById('mu-driverName').value)">Login as Driver</button>
+      </div>
+    </div>
+
   </div>
   <div id="partsAdmin" class="section" style="display:none">
     <div class="form-wrap" style="border:2px solid #0A4A8C">
@@ -255,6 +290,7 @@ footer a{color:#FFD9B0;text-decoration:none}
 <script>
 let businesses=[
   {name:"JJ TEAM - JoJo Cleaning Services",cat:"services",rating:"5.0 ★",type:"Services • Cleaning • Musina",loc:"Musina, Limpopo • 076 357 4601",desc:"JoJo Tank Cleaning (1000L-10000L), Garden Service & Spring Cleaning + Window Cleaning R450. Top quality chemicals, PPE & Safety. Book & Pay Online. Sundays Closed.",img:"logo.jpg",gallery:["jojo.jpg","garden.jpg","spring.jpg"],open:"Open now • Mon-Sat • Sun Closed",isJJ:true},
+  {name:"MUSTOWN UBER REQUEST",cat:"services",rating:"5.0 ★",type:"Uber • Transport • Musina",loc:"Mustown, Musina • 076 358 4601",desc:"Mustown Uber - Musina only. DAVIS Rumion Plate 2264 L, John. Request ride, see quote, confirm on WhatsApp.",img:"logo.png",open:"Open now • Musina",isMustown:true},
   {name:"MOONATE KO KASI",cat:"food",rating:"5.0 ★",type:"Fast Food • Delivery • Proudly Kasi",loc:"Musina, Central • 20-35 min delivery",desc:"Giant Rolls Box, Loaded Tower, Cheese Burger, Classic Burger. FREE delivery within 3km. Est 2023. Phone: 0799073779",img:"pic1.jpg",gallery:["pic2.jpg","pic3.jpg"],link:"https://musinapos.github.io/moonate-ko-kasi/",open:"Open now • 08:00-22:00"},
   {name:"TAKEALOT",cat:"retail",rating:"4.8 ★",type:"Retail • Shop & Earn Points",loc:"South Africa • Delivers to Musina",desc:"Shop on Takealot & Earn Points. Vouchers, Airtime, Data, Electricity & DStv. 1.2k Reviews • Verified.",img:"https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=600&q=80",link:"https://www.takealot.com",open:"Open now • 24/7 Online"},
   {name:"TAHOR Kids Bookstore",cat:"bookstore",rating:"5.0 ★",type:"Kids Books • TAHOR Book • Read & Learn",loc:"Musina • Online • All South Africa",desc:"TAHOR Kids Book - Passion Over Laziness. Book 1 for kids 5-10. Inside the Bookstore mini-app. FREE for testing.",img:"pic4.jpg",open:"Open now • 24/7 Online",isBookstore:true},
@@ -270,6 +306,7 @@ function renderMain(){
   grid.innerHTML=businesses.map(b=>{
     if(b.name==='TAKEALOT'){return `<div class="card"><img src="${b.img}" onclick="openTakealot()" style="cursor:pointer"><div class="card-body"><span class="badge">RETAIL • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="openTakealot()">Shop Now & Earn Points →</a></div></div>`;}
     if(b.isJJ){return `<div class="card"><img src="${b.img}"><div class="gallery"><img src="${b.gallery[1]}"><img src="${b.gallery[2]}"></div><div class="card-body"><span class="badge">SERVICES • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="setCat('services',document.querySelector('.cat.services'))">Open JJ TEAM App →</a></div></div>`;}
+    if(b.isMustown){return `<div class="card"><div style="height:170px;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:80px">🚕</div><div class="card-body"><span class="badge">UBER • MUSINA</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="setCat('services',document.querySelector('.cat.services'))">Request Uber Now →</a></div></div>`;}
     return `<div class="card"><img src="${b.img}">${b.gallery?`<div class="gallery"><img src="${b.gallery[0]}"><img src="${b.gallery[1]}"></div>`:''}<div class="card-body"><span class="badge ${b.cat==='bookstore'?'book':''}">${b.cat.toUpperCase()} • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p>${b.isBookstore?`<a class="btn book" onclick="openBookstore()">📚 Open Bookstore →</a>`:`<a href="${b.link||'#'}" class="btn" target="_blank" rel="noopener">View Details →</a>`}</div></div>`;
   }).join('');
 }
@@ -278,6 +315,7 @@ function render(){
   let grid=document.getElementById('businessGrid'); if(!grid) return;
   let filterBar=document.getElementById('partsFilterBar'); if(filterBar) filterBar.style.display = currentCat==='carparts' ? 'flex' : 'none';
   document.getElementById('jjInside').style.display = currentCat==='services' ? 'block' : 'none';
+  document.getElementById('muInside').style.display = currentCat==='services' ? 'block' : 'none';
   if(currentCat==='carparts'){
     let make=document.getElementById('makeFilter').value;
     let activeParts=parts.filter(p=>p.active==1 && (make==='ALL'||p.make===make) && (p.name.toLowerCase().includes(q)||p.model.toLowerCase().includes(q)));
@@ -288,6 +326,7 @@ function render(){
   grid.innerHTML=filtered.map(b=>{
     if(b.name==='TAKEALOT'){return `<div class="card"><img src="${b.img}" onclick="openTakealot()" style="cursor:pointer"><div class="card-body"><span class="badge">RETAIL • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="openTakealot()">Shop Now & Earn Points →</a><a class="btn" href="https://www.takealot.com" target="_blank" rel="noopener" style="margin-top:8px;background:#0A4A8C;color:#fff;border-color:#0A4A8C">Visit Takealot.com ↗</a></div></div>`;}
     if(b.isJJ){return `<div class="card"><img src="${b.img}"><div class="gallery"><img src="${b.gallery[1]}"><img src="${b.gallery[2]}"></div><div class="card-body"><span class="badge">SERVICES • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="document.getElementById('jjInside').scrollIntoView({behavior:'smooth'})">Open JJ TEAM App →</a></div></div>`;}
+    if(b.isMustown){return `<div class="card"><div style="height:170px;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:80px">🚕</div><div class="card-body"><span class="badge">UBER • MUSINA</span><h3>${b.name}</h3><p>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="document.getElementById('muInside').scrollIntoView({behavior:'smooth'})">Request Uber Now →</a></div></div>`;}
     return `<div class="card"><img src="${b.img}">${b.gallery?`<div class="gallery"><img src="${b.gallery[0]}"><img src="${b.gallery[1]}"></div>`:''}<div class="card-body"><span class="badge ${b.cat==='bookstore'?'book':''}">${b.cat.toUpperCase()} • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p>${b.isBookstore?`<a class="btn book" onclick="openBookstore()">📚 Open Bookstore →</a>`:`<a href="${b.link||'#'}" class="btn" target="_blank" rel="noopener">View Details →</a>`}</div></div>`;
   }).join('') || '<p style="text-align:center">No businesses found. Try another search.</p>';
 }
@@ -317,7 +356,7 @@ const textToType = "All businesses in one pot";
 let charIndex = 0; let isDeleting = false;
 function typeEffect(){const el = document.getElementById('typingText');if(!el) return;if(!isDeleting){charIndex++;el.textContent = textToType.substring(0, charIndex);if(charIndex === textToType.length){ isDeleting = true; setTimeout(typeEffect, 1200); return; }setTimeout(typeEffect, 220);} else {charIndex--;el.textContent = textToType.substring(0, charIndex);if(charIndex === 0){ isDeleting = false; setTimeout(typeEffect, 0); return; }setTimeout(typeEffect, 60);}}
 typeEffect();
-// JJ TEAM LOGIC - 1 room at a time, Sundays blocked
+// JJ TEAM LOGIC
 let jjSelected={};
 function jjBack(){document.querySelectorAll('.jj-room').forEach(r=>r.classList.remove('active'));document.getElementById('jjHome').style.display='grid'}
 function jjOpen(id){document.getElementById('jjHome').style.display='none';document.querySelectorAll('.jj-room').forEach(r=>r.classList.remove('active'));document.getElementById('jj-'+id).classList.add('active')}
@@ -330,6 +369,41 @@ function jjSelect(el,id){document.querySelectorAll('#cal-'+id+' .jj-day').forEac
 jjBuild('jojo');jjBuild('garden');jjBuild('spring');
 function jjBook(s,id){let n=document.getElementById('n-'+id).value;let d=jjSelected[id]||'No date';if(!n){alert('Please fill Name');return}window.open('https://wa.me/27763574601?text='+encodeURIComponent('Hi JJ TEAM, I want '+s+' on '+d+' Name: '+n),'_blank')}
 function jjPay(s){alert(s+' - Online Payment: PayFast / Yoco / Card - R450 for Spring');window.open('https://wa.me/27763574601?text='+encodeURIComponent('I want to pay online for '+s),'_blank')}
+// MUSTOWN UBER LOGIC - MUSINA ONLY
+let muTotal=0;
+function muDist(dest){let d=dest.toLowerCase();if(d.includes("cbd")||d.includes("musina town"))return 6;if(d.includes("nancefield"))return 5;if(d.includes("ext 14"))return 4;if(d.includes("mustown"))return 3;if(d.includes("hospital"))return 7;if(d.includes("border")||d.includes("beitbridge"))return 10;if(d.includes("mall")||d.includes("savoy")||d.includes("shoprite"))return 6;return 8;}
+function muQuote(){
+  let n=document.getElementById('mu-name').value.trim(), ph=document.getElementById('mu-phone').value.trim(), pk=document.getElementById('mu-pickup').value.trim(), ds=document.getElementById('mu-dest').value.trim(), ps=parseInt(document.getElementById('mu-pass').value);
+  if(!n||!ph||!pk||!ds){alert('Fill name, phone, pickup and destination - Musina');return}
+  let dist=muDist(ds); let total=30 + (dist*8) + Math.max(0,ps-1)*10; muTotal=total;
+  document.getElementById('mu-quote').style.display='block';
+  document.getElementById('mu-quoteText').innerText=`From ${pk} to ${ds} • ${dist}km • ${ps} Passengers`;
+  document.getElementById('mu-total').innerText='TOTAL: R'+total;
+}
+function muConfirm(){
+  let n=document.getElementById('mu-name').value, ph=document.getElementById('mu-phone').value, pk=document.getElementById('mu-pickup').value, ds=document.getElementById('mu-dest').value, ps=document.getElementById('mu-pass').value, nt=document.getElementById('mu-notes').value;
+  let msg=`Hello Mustown Uber Musina%0A%0A*Name:* ${n}%0A*Phone:* ${ph}%0A*From:* ${pk}%0A*To:* ${ds}%0A*Passengers:* ${ps}%0A*Notes:* ${nt}%0A%0A*QUOTED PRICE: R${muTotal}*`;
+  window.open(`https://wa.me/27763584601?text=${msg}`,'_blank');
+}
+</script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+const firebaseConfig = { apiKey: "AIzaSyAxr3YY5JBhy_IZ-E6Q9wagGxPSSb1POAg", authDomain: "mtown-07790.firebaseapp.com", projectId: "mtown-07790", storageBucket: "mtown-07790.firebasestorage.app", messagingSenderId: "421618677628", appId: "1:421618677628:web:ce910417eb09410dcbd6f9", measurementId: "G-9KTX5J8G65" };
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+onSnapshot(collection(db, "drivers"), (snap) => {
+  let dbg=document.getElementById("mu-debug"); if(dbg) dbg.innerText = "Found in Firebase: " + snap.size + " drivers - Musina";
+  let html="";
+  if(snap.empty){
+    html=`<div class="mu-driver"><img src="logo.png" onerror="this.src='https://via.placeholder.com/60'"><div><b>🚗 DAVIS</b><br>📞 0763584601<br>Car: Rumion | Plate: 2264 L | Available</div></div><div class="mu-driver"><img src="logo.png" onerror="this.src='https://via.placeholder.com/60'"><div><b>🚗 John</b><br>📞 0725660255<br>Driver | Available</div></div>`;
+  } else {
+    snap.forEach(doc=>{let d=doc.data(); html+=`<div class="mu-driver"><img src="${d.photo||'logo.png'}" onerror="this.src='https://via.placeholder.com/60'"><div><b>🚗 ${d.name}</b><br>📞 ${d.phone}<br>Car: ${d.car||''} | Plate: ${d.plate||''} | ${d.status||'Available'}</div></div>`;});
+  }
+  let el=document.getElementById("mu-drivers"); if(el) el.innerHTML=html;
+}, (err)=>{
+  let el=document.getElementById("mu-drivers"); if(el) el.innerHTML=`<div class="mu-driver"><img src="logo.png"><div><b>🚗 DAVIS</b><br>📞 0763584601<br>Car: Rumion | Plate: 2264 L</div></div><div class="mu-driver"><img src="logo.png"><div><b>🚗 John</b><br>📞 0725660255<br>Driver</div></div>`;
+});
 </script>
 </body>
 </html>
