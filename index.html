@@ -29,8 +29,6 @@ nav a{color:#fff;text-decoration:none}
 .meta{font-size:12px;margin-top:10px;color:#555}
 #cursor{animation:blink .9s infinite;font-weight:bold;color:var(--dark)}
 @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
-
-/* === BUTTONS 3x2 GRID - BROAD, NOT DOWN === */
 .categories{display:grid;grid-template-columns:repeat(3, 1fr);gap:10px;padding:16px 12px;max-width:800px;margin:auto}
 .cat{padding:16px 6px;border-radius:20px;border:3px solid rgba(255,255,255,.6);cursor:pointer;font-weight:900;font-size:13px;color:#fff;box-shadow:0 6px 16px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;gap:6px;text-align:center;min-height:60px}
 .cat.active{transform:scale(1.03);outline:3px solid #fff;outline-offset:2px}
@@ -41,7 +39,6 @@ nav a{color:#fff;text-decoration:none}
 .cat.preorder{background:linear-gradient(135deg,#0b5e2f,#25D366)}
 .cat.parts{background:linear-gradient(135deg,#0A4A8C,#2D7BFF)}
 @media(max-width:500px){.cat{font-size:12px;padding:14px 4px}}
-
 .section{max-width:1100px;margin:auto;padding:10px 15px 30px}
 .section h2{text-align:center;color:var(--dark);font-size:24px;margin:10px 0}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:20px}
@@ -121,6 +118,20 @@ footer a{color:#FFD9B0;text-decoration:none}
 .parts-bar{max-width:1100px;margin:15px auto;background:#fff;padding:12px;border-radius:14px;display:flex;gap:8px;flex-wrap:wrap;border:1.5px solid #0A4A8C}
 .parts-bar select{padding:10px;border:1.5px solid #ddd;border-radius:10px}
 .parts-bar button{background:var(--orange);color:#fff;border:none;padding:10px 14px;border-radius:10px;font-weight:bold;cursor:pointer}
+/* JJ TEAM INSIDE TAHOR */
+.jj-wrap{background:#0f172a;color:#fff;border-radius:18px;padding:16px;margin-top:12px}
+.jj-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.jj-card{background:#1e293b;border-radius:14px;overflow:hidden;cursor:pointer}
+.jj-card img{width:100%;height:110px;object-fit:cover}
+.jj-card div{padding:10px}
+.jj-room{display:none;background:#1e293b;padding:14px;border-radius:14px;margin-top:10px}
+.jj-room.active{display:block}
+.jj-room input{width:100%;padding:11px;margin:7px 0;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#fff}
+.jj-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center;font-size:11px;margin:10px 0}
+.jj-day{padding:9px 0;background:#0f172a;border-radius:8px;cursor:pointer}
+.jj-day.dis{background:#111827;color:#475569;text-decoration:line-through}
+.jj-day.sel{background:#22c55e;color:#000;font-weight:900}
+.jj-btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:900;margin-top:8px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -137,7 +148,6 @@ footer a{color:#FFD9B0;text-decoration:none}
   <div class="meta">📍 Located in Musina • Limpopo • South Africa • 100+ businesses listed</div>
 </div>
 
-<!-- === BUTTONS 3x2 - BROAD === -->
 <div class="categories" id="businesses">
   <div class="cat food" onclick="setCat('food',this)">🍔 Food</div>
   <div class="cat retail" onclick="setCat('retail',this)">🛍️ Retail</div>
@@ -147,12 +157,10 @@ footer a{color:#FFD9B0;text-decoration:none}
   <div class="cat preorder" onclick="window.location.href='pre-order.html'">🛒 Pre-Order</div>
 </div>
 
-<!-- MAIN PAGE SECTION - HIDDEN WHEN INSIDE -->
 <div id="mainPage">
   <div class="section"><h2>Featured Businesses</h2><div class="grid" id="mainGrid"></div></div>
 </div>
 
-<!-- INSIDE PAGE - SHOWS WHEN YOU TAP A BUTTON -->
 <div id="insidePage" style="display:none">
   <div class="section">
     <button onclick="goBackHome()" style="background:#0A4A8C;color:#fff;border:none;padding:10px 18px;border-radius:20px;font-weight:bold;cursor:pointer;margin-bottom:12px">⬅️ Back to TAHOR Home</button>
@@ -163,6 +171,43 @@ footer a{color:#FFD9B0;text-decoration:none}
       <span style="font-size:12px;color:#666;align-self:center">Only ACTIVE parts show to customers</span>
     </div>
     <div class="grid" id="businessGrid"></div>
+
+    <!-- JJ TEAM INSIDE SERVICES -->
+    <div id="jjInside" style="display:none" class="jj-wrap">
+      <div style="text-align:center"><img src="logo.jpg" style="width:90px;height:90px;object-fit:cover;border-radius:50%;border:3px solid #fff"><h2 style="color:#fff">JJ TEAM</h2><p style="font-size:12px;opacity:.8">JoJo Cleaning Services • 076 357 4601 • Sundays Closed</p></div>
+      <div class="jj-grid" id="jjHome">
+        <div class="jj-card" onclick="jjOpen('jojo')"><img src="jojo.jpg"><div><b>JOJO TANK</b><br><small>From R350</small></div></div>
+        <div class="jj-card" onclick="jjOpen('garden')"><img src="garden.jpg"><div><b>GARDEN</b><br><small>From R300</small></div></div>
+        <div class="jj-card" style="grid-column:1/-1" onclick="jjOpen('spring')"><img src="spring.jpg"><div><b>SPRING CLEANING</b><br><small>From R450 • Windows Included</small></div></div>
+      </div>
+
+      <div id="jj-jojo" class="jj-room">
+        <span style="color:#38bdf8;cursor:pointer" onclick="jjBack()">← Back</span>
+        <h3>JOJO TANK CLEANING</h3><p style="font-size:13px;color:#94a3b8">1000L R350 • 2500L R550 • 5000L R850 • 10000L R1200</p>
+        <div id="cal-jojo"></div><input id="n-jojo" placeholder="Full Name"><input id="p-jojo" placeholder="Phone"><input id="a-jojo" placeholder="Address">
+        <button class="jj-btn" style="background:#22c55e" onclick="jjBook('JoJo Tank','jojo')">✅ Confirm Booking</button>
+        <button class="jj-btn" style="background:#f59e0b" onclick="jjPay('JoJo Tank')">💳 Pay Online Now</button>
+      </div>
+
+      <div id="jj-garden" class="jj-room">
+        <span style="color:#38bdf8;cursor:pointer" onclick="jjBack()">← Back</span>
+        <h3>GARDEN SERVICE</h3><p style="font-size:13px;color:#94a3b8">Small R300 • Medium R450 • Large R650</p>
+        <div id="cal-garden"></div><input id="n-garden" placeholder="Full Name"><input id="p-garden" placeholder="Phone"><input id="a-garden" placeholder="Address">
+        <button class="jj-btn" style="background:#22c55e" onclick="jjBook('Garden Service','garden')">✅ Confirm Booking</button>
+        <button class="jj-btn" style="background:#f59e0b" onclick="jjPay('Garden Service')">💳 Pay Online Now</button>
+      </div>
+
+      <div id="jj-spring" class="jj-room">
+        <span style="color:#38bdf8;cursor:pointer" onclick="jjBack()">← Back</span>
+        <h3>SPRING CLEANING</h3><p style="font-size:13px;color:#94a3b8">Spring R450 • Window Cleaning R450 Included • High Windows R250</p>
+        <button class="jj-btn" style="background:#0ea5e9;color:#fff" onclick="alert('Window Cleaning R450 Included')">+ Window Cleaning R450</button>
+        <button class="jj-btn" style="background:#0ea5e9;color:#fff" onclick="alert('Spring Deep Clean R450')">+ Spring Deep Clean R450</button>
+        <div id="cal-spring"></div><input id="n-spring" placeholder="Full Name"><input id="p-spring" placeholder="Phone"><input id="a-spring" placeholder="Address">
+        <button class="jj-btn" style="background:#22c55e" onclick="jjBook('Spring Cleaning','spring')">✅ Confirm Booking</button>
+        <button class="jj-btn" style="background:#f59e0b" onclick="jjPay('Spring Cleaning')">💳 Pay Online Now</button>
+        <button class="jj-btn" style="background:#fff" onclick="window.open('https://wa.me/27763574601?text=Hi JJ TEAM I need Spring','_blank')">💬 WhatsApp 0763574601</button>
+      </div>
+    </div>
   </div>
   <div id="partsAdmin" class="section" style="display:none">
     <div class="form-wrap" style="border:2px solid #0A4A8C">
@@ -183,121 +228,33 @@ footer a{color:#FFD9B0;text-decoration:none}
 
 <div id="takealotModal" class="modal" onclick="if(event.target===this)closeTakealot()">
   <div class="modal-inner" style="background:#fff">
-    <div style="background:#0F766E;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;color:#fff">
-      <b>TAHOR TOWER</b>
-      <button onclick="closeTakealot()" style="background:#fff;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer">✕ Close</button>
-    </div>
-    <div class="ta-hero">
-      <h2>Shop on Takealot<br>& Earn Points</h2>
-      <p>Earn points on every Takealot order.<br>Redeem for vouchers, airtime, data & more.</p>
-      <a class="ta-yellow" href="https://www.takealot.com" target="_blank" rel="noopener">🛍️ Shop Now & Earn Points</a>
-    </div>
+    <div style="background:#0F766E;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;color:#fff"><b>TAHOR TOWER</b><button onclick="closeTakealot()" style="background:#fff;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer">✕ Close</button></div>
+    <div class="ta-hero"><h2>Shop on Takealot<br>& Earn Points</h2><p>Earn points on every Takealot order.<br>Redeem for vouchers, airtime, data & more.</p><a class="ta-yellow" href="https://www.takealot.com" target="_blank" rel="noopener">🛍️ Shop Now & Earn Points</a></div>
     <div class="ta-teal">
-      <div class="ta-trust">
-        <div class="ta-trust-left">
-          <span style="font-size:26px">⭐</span>
-          <div><b>Trust Score 4.8</b><span>1.2k Reviews • Trusted by customers</span></div>
-        </div>
-        <span class="ta-verified">Verified</span>
-      </div>
+      <div class="ta-trust"><div class="ta-trust-left"><span style="font-size:26px">⭐</span><div><b>Trust Score 4.8</b><span>1.2k Reviews • Trusted by customers</span></div></div><span class="ta-verified">Verified</span></div>
       <div class="ta-section-title">Shop</div>
-      <div class="ta-shop">
-        <a href="https://www.takealot.com/all?search=vouchers" target="_blank" rel="noopener"><span>🎟️</span><b>Vouchers</b></a>
-        <a href="https://www.takealot.com/all?search=airtime" target="_blank" rel="noopener"><span>📞</span><b>Airtime</b></a>
-        <a href="https://www.takealot.com/all?search=data" target="_blank" rel="noopener"><span>📊</span><b>Data</b></a>
-        <a href="https://www.takealot.com/all?search=electricity" target="_blank" rel="noopener"><span>⚡</span><b>Electricity</b></a>
-        <a href="https://www.takealot.com/all?search=dstv" target="_blank" rel="noopener"><span>📺</span><b>DStv</b></a>
-      </div>
+      <div class="ta-shop"><a href="https://www.takealot.com/all?search=vouchers" target="_blank" rel="noopener"><span>🎟️</span><b>Vouchers</b></a><a href="https://www.takealot.com/all?search=airtime" target="_blank" rel="noopener"><span>📞</span><b>Airtime</b></a><a href="https://www.takealot.com/all?search=data" target="_blank" rel="noopener"><span>📊</span><b>Data</b></a><a href="https://www.takealot.com/all?search=electricity" target="_blank" rel="noopener"><span>⚡</span><b>Electricity</b></a><a href="https://www.takealot.com/all?search=dstv" target="_blank" rel="noopener"><span>📺</span><b>DStv</b></a></div>
       <div class="ta-section-title">Earn</div>
-      <div class="ta-earn">
-        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80">
-        <div>
-          <h3>Earn with Credit Card</h3>
-          <p>Link your card to earn 2x points on every spend.</p>
-          <a href="https://www.takealot.com/credit-card" target="_blank" rel="noopener">Learn more →</a>
-        </div>
-      </div>
-      <div class="ta-bottom">
-        <a href="https://www.takealot.com" target="_blank" rel="noopener" style="background:#0A4A8C">🛒 Shop on Takealot</a>
-        <a href="https://wa.me/27799073779?text=Hi%20TAHOR!%20I%20want%20to%20order%20from%20Takealot%20and%20earn%20points" target="_blank" rel="noopener" style="background:#25D366">💬 WhatsApp Order</a>
-      </div>
+      <div class="ta-earn"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80"><div><h3>Earn with Credit Card</h3><p>Link your card to earn 2x points on every spend.</p><a href="https://www.takealot.com/credit-card" target="_blank" rel="noopener">Learn more →</a></div></div>
+      <div class="ta-bottom"><a href="https://www.takealot.com" target="_blank" rel="noopener" style="background:#0A4A8C">🛒 Shop on Takealot</a><a href="https://wa.me/27799073779?text=Hi%20TAHOR!%20I%20want%20to%20order%20from%20Takealot%20and%20earn%20points" target="_blank" rel="noopener" style="background:#25D366">💬 WhatsApp Order</a></div>
       <p style="text-align:center;color:#fff;font-size:11px;margin:0 0 8px">TAHOR is not affiliated with Takealot. Takealot is a trademark of Takealot (Pty) Ltd.<br>📍 Musina Ext 14, House 5224 • WhatsApp 079 907 3779 • Call 068 036 1133</p>
     </div>
   </div>
 </div>
 
-<div id="bookModal" class="modal">
-  <div class="modal-inner">
-    <div class="modal-head">
-      <h2>📚 TAHOR Kids Bookstore</h2>
-      <p>Inside TAHOR • For Kids in Musina & Everywhere</p>
-      <button class="close-btn" onclick="closeBookstore()">✕ Close Store</button>
-    </div>
-    <img class="store-banner" src="pic4.jpg" alt="Bookstore">
-    <div class="shelf-wrap">
-      <div class="shelf-title">📚 Shelf 1 — Passion Books</div>
-      <div class="shelf">
-        <div class="book-on-shelf" onclick="openBook()">
-          <img src="pic5.jpg" alt="Book Cover">
-          <b>Passion Over Laziness</b>
-          <small>👆 Tap to Open</small>
-        </div>
-        <div class="empty-slot">Coming Soon<br>Book 2</div>
-        <div class="empty-slot">Coming Soon<br>Book 3</div>
-      </div>
-      <p style="font-size:12px;color:#666;margin-top:10px;text-align:center">Shelf 1 • More books coming soon — we will add more shelves later</p>
-    </div>
-    <a class="wa-btn" href="https://wa.me/27799073779?text=Hi%20TAHOR%20Kids%20Bookstore!%20I%20want%20Passion%20Over%20Laziness" target="_blank">📱 Order on WhatsApp</a>
-  </div>
-</div>
+<div id="bookModal" class="modal"><div class="modal-inner"><div class="modal-head"><h2>📚 TAHOR Kids Bookstore</h2><p>Inside TAHOR • For Kids in Musina & Everywhere</p><button class="close-btn" onclick="closeBookstore()">✕ Close Store</button></div><img class="store-banner" src="pic4.jpg" alt="Bookstore"><div class="shelf-wrap"><div class="shelf-title">📚 Shelf 1 — Passion Books</div><div class="shelf"><div class="book-on-shelf" onclick="openBook()"><img src="pic5.jpg" alt="Book Cover"><b>Passion Over Laziness</b><small>👆 Tap to Open</small></div><div class="empty-slot">Coming Soon<br>Book 2</div><div class="empty-slot">Coming Soon<br>Book 3</div></div><p style="font-size:12px;color:#666;margin-top:10px;text-align:center">Shelf 1 • More books coming soon — we will add more shelves later</p></div><a class="wa-btn" href="https://wa.me/27799073779?text=Hi%20TAHOR%20Kids%20Bookstore!%20I%20want%20Passion%20Over%20Laziness" target="_blank">📱 Order on WhatsApp</a></div></div>
 
-<div id="readerModal" class="modal">
-  <div class="modal-inner">
-    <div class="modal-head">
-      <h2>📖 Passion Over Laziness</h2>
-      <p id="readerPageLabel">Cover — Page 1 of 6</p>
-      <button class="close-btn" onclick="closeBook()">✕ Close Book</button>
-    </div>
-    <div class="reader">
-      <img id="readerImg" src="pic5.jpg">
-      <h3 id="readerTitle">Cover — Passion Over Laziness</h3>
-      <p id="readerText">By TAHOR Kids • Age 5-10 • English<br>Passion is doing what you love, even when it's hard. Laziness is waiting for tomorrow.</p>
-      <div class="reader-nav">
-        <button id="prevBtn" onclick="prevPage()" disabled>← Prev</button>
-        <button onclick="nextPage()">Next →</button>
-      </div>
-      <p style="font-size:12px;color:#888;margin-top:10px">Tap Next to turn the page like a real book</p>
-    </div>
-  </div>
-</div>
+<div id="readerModal" class="modal"><div class="modal-inner"><div class="modal-head"><h2>📖 Passion Over Laziness</h2><p id="readerPageLabel">Cover — Page 1 of 6</p><button class="close-btn" onclick="closeBook()">✕ Close Book</button></div><div class="reader"><img id="readerImg" src="pic5.jpg"><h3 id="readerTitle">Cover — Passion Over Laziness</h3><p id="readerText">By TAHOR Kids • Age 5-10 • English<br>Passion is doing what you love, even when it's hard. Laziness is waiting for tomorrow.</p><div class="reader-nav"><button id="prevBtn" onclick="prevPage()" disabled>← Prev</button><button onclick="nextPage()">Next →</button></div><p style="font-size:12px;color:#888;margin-top:10px">Tap Next to turn the page like a real book</p></div></div></div>
 
-<div class="pricing" id="pricing">
-  <h2>Business Pricing</h2><p>How businesses pay to be advertised inside TAHOR Tower</p>
-  <div class="pricing-grid">
-    <div class="plan"><h3>Package 1 - Basic</h3><div class="price">R60</div><ul><li>✓ Business card inside TAHOR for advertising</li><li>✓ Only pictures of the business</li><li>✓ Plain contact details only - phone & address</li><li>✗ No WhatsApp reach - cannot communicate through app</li></ul><button onclick="selectPlan('Package 1 - Basic R60')">Choose Basic R60</button></div>
-    <div class="plan featured"><div style="background:#fff;color:#FF6B00;font-size:11px;font-weight:bold;padding:4px 10px;border-radius:20px;display:inline-block">MOST POPULAR</div><h3>Package 2 - Standard</h3><div class="price">R100</div><ul><li>✓ Everything in Package 1</li><li>✓ More pictures of business & products</li><li>✓ Order Button inside TAHOR platform</li><li>✓ Customers can order through TAHOR Tower</li></ul><button onclick="selectPlan('Package 2 - Standard R100')">Get Standard R100</button></div>
-    <div class="plan"><h3>Package 3 - Premium</h3><div class="price">R140</div><ul><li>✓ Everything in Package 2</li><li>✓ Full package + Own Mini App inside TAHOR</li><li>✓ Own pictures, design & layout inside TAHOR</li><li>✓ Full business designed inside TAHOR</li></ul><button onclick="selectPlan('Package 3 - Premium R140')">Get Premium R140</button></div>
-  </div>
-  <p style="max-width:800px;margin:15px auto 0;font-size:13px;color:#555"><b>R60:</b> You are seen only • <b>R100:</b> You are seen + customers can order through TAHOR • <b>R140:</b> You get your own Mini App inside TAHOR</p>
-</div>
+<div class="pricing" id="pricing"><h2>Business Pricing</h2><p>How businesses pay to be advertised inside TAHOR Tower</p><div class="pricing-grid"><div class="plan"><h3>Package 1 - Basic</h3><div class="price">R60</div><ul><li>✓ Business card inside TAHOR for advertising</li><li>✓ Only pictures of the business</li><li>✓ Plain contact details only - phone & address</li><li>✗ No WhatsApp reach - cannot communicate through app</li></ul><button onclick="selectPlan('Package 1 - Basic R60')">Choose Basic R60</button></div><div class="plan featured"><div style="background:#fff;color:#FF6B00;font-size:11px;font-weight:bold;padding:4px 10px;border-radius:20px;display:inline-block">MOST POPULAR</div><h3>Package 2 - Standard</h3><div class="price">R100</div><ul><li>✓ Everything in Package 1</li><li>✓ More pictures of business & products</li><li>✓ Order Button inside TAHOR platform</li><li>✓ Customers can order through TAHOR Tower</li></ul><button onclick="selectPlan('Package 2 - Standard R100')">Get Standard R100</button></div><div class="plan"><h3>Package 3 - Premium</h3><div class="price">R140</div><ul><li>✓ Everything in Package 2</li><li>✓ Full package + Own Mini App inside TAHOR</li><li>✓ Own pictures, design & layout inside TAHOR</li><li>✓ Full business designed inside TAHOR</li></ul><button onclick="selectPlan('Package 3 - Premium R140')">Get Premium R140</button></div></div><p style="max-width:800px;margin:15px auto 0;font-size:13px;color:#555"><b>R60:</b> You are seen only • <b>R100:</b> You are seen + customers can order through TAHOR • <b>R140:</b> You get your own Mini App inside TAHOR</p></div>
 
-<div class="section" id="add">
-  <div style="background:var(--blue);color:#fff;padding:25px;border-radius:16px;text-align:center"><h2 style="color:#fff">Ready to grow your business?</h2><p>Join hundreds of Musina businesses growing their reach with TAHOR.</p></div>
-  <div class="form-wrap"><h2 style="color:var(--dark)">ADD YOUR BUSINESS IN THE POT</h2>
-    <input id="bName" placeholder="Business Name e.g. Ele's Fast Food">
-    <select id="bCat"><option value="food">Food</option><option value="truck">Truck Stop</option><option value="retail">Retail</option><option value="services">Services</option><option value="bookstore">Bookstore</option><option value="carparts">Used Car Parts</option></select>
-    <input id="bPhone" placeholder="Phone / WhatsApp e.g. 068 036 1133">
-    <input id="bLoc" placeholder="Location e.g. Musina, Central">
-    <textarea id="bDesc" placeholder="What do you sell? e.g. Chicken, chips, burgers, affordable meals"></textarea>
-    <select id="bPlan"><option>Package 1 - Basic R60</option><option>Package 2 - Standard R100</option><option>Package 3 - Premium R140</option></select>
-    <button onclick="addBusiness()">Add My Business →</button><p id="msg" style="text-align:center;color:green;margin-top:10px"></p>
-  </div>
-</div>
+<div class="section" id="add"><div style="background:var(--blue);color:#fff;padding:25px;border-radius:16px;text-align:center"><h2 style="color:#fff">Ready to grow your business?</h2><p>Join hundreds of Musina businesses growing their reach with TAHOR.</p></div><div class="form-wrap"><h2 style="color:var(--dark)">ADD YOUR BUSINESS IN THE POT</h2><input id="bName" placeholder="Business Name e.g. Ele's Fast Food"><select id="bCat"><option value="food">Food</option><option value="truck">Truck Stop</option><option value="retail">Retail</option><option value="services">Services</option><option value="bookstore">Bookstore</option><option value="carparts">Used Car Parts</option></select><input id="bPhone" placeholder="Phone / WhatsApp e.g. 068 036 1133"><input id="bLoc" placeholder="Location e.g. Musina, Central"><textarea id="bDesc" placeholder="What do you sell? e.g. Chicken, chips, burgers, affordable meals"></textarea><select id="bPlan"><option>Package 1 - Basic R60</option><option>Package 2 - Standard R100</option><option>Package 3 - Premium R140</option></select><button onclick="addBusiness()">Add My Business →</button><p id="msg" style="text-align:center;color:green;margin-top:10px"></p></div></div>
 
 <footer><div style="display:flex;align-items:center;justify-content:center;gap:8px"><img src="icon.jpg" style="width:28px;height:28px;border-radius:50%;object-fit:cover;"><strong style="font-size:20px">TA<span style="color:#FF6B00">HOR</span></strong></div><br>Connecting Musina businesses and customers since 2026.<br>shaifrank6@gmail.com • 068 036 1133 / 072 566 0255 • WhatsApp 079 907 3779<br>Musina Ext 14, 5224 • Musina, Limpopo<br><a href="#">Businesses • Pricing • About Us • Support</a><br>© 2026 TAHOR Businesses Marketing Platform • www.tahor.co.za • Privacy Policy • Terms of Service • All Rights Reserved<br><strong>Designed by Musina POS Systems</strong></footer>
 
 <script>
 let businesses=[
+  {name:"JJ TEAM - JoJo Cleaning Services",cat:"services",rating:"5.0 ★",type:"Services • Cleaning • Musina",loc:"Musina, Limpopo • 076 357 4601",desc:"JoJo Tank Cleaning (1000L-10000L), Garden Service & Spring Cleaning + Window Cleaning R450. Top quality chemicals, PPE & Safety. Book & Pay Online. Sundays Closed.",img:"logo.jpg",gallery:["jojo.jpg","garden.jpg","spring.jpg"],open:"Open now • Mon-Sat • Sun Closed",isJJ:true},
   {name:"MOONATE KO KASI",cat:"food",rating:"5.0 ★",type:"Fast Food • Delivery • Proudly Kasi",loc:"Musina, Central • 20-35 min delivery",desc:"Giant Rolls Box, Loaded Tower, Cheese Burger, Classic Burger. FREE delivery within 3km. Est 2023. Phone: 0799073779",img:"pic1.jpg",gallery:["pic2.jpg","pic3.jpg"],link:"https://musinapos.github.io/moonate-ko-kasi/",open:"Open now • 08:00-22:00"},
   {name:"TAKEALOT",cat:"retail",rating:"4.8 ★",type:"Retail • Shop & Earn Points",loc:"South Africa • Delivers to Musina",desc:"Shop on Takealot & Earn Points. Vouchers, Airtime, Data, Electricity & DStv. 1.2k Reviews • Verified.",img:"https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?w=600&q=80",link:"https://www.takealot.com",open:"Open now • 24/7 Online"},
   {name:"TAHOR Kids Bookstore",cat:"bookstore",rating:"5.0 ★",type:"Kids Books • TAHOR Book • Read & Learn",loc:"Musina • Online • All South Africa",desc:"TAHOR Kids Book - Passion Over Laziness. Book 1 for kids 5-10. Inside the Bookstore mini-app. FREE for testing.",img:"pic4.jpg",open:"Open now • 24/7 Online",isBookstore:true},
@@ -305,153 +262,74 @@ let businesses=[
 let ADMIN_PIN = "5224";
 let isEditor = false;
 let parts = JSON.parse(localStorage.getItem('tahor_parts')||'null');
-if(!parts){
-  parts=[
-    {name:"1.6 Corolla Block",make:"Toyota",model:"Toyota Corolla 1.6",price:8500,qty:3,img:"https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80",cond:"Used - Good Condition",active:1,note:"Needs cleaning before collection - cleaned on order"},
-    {name:"1.6 Corolla Top (Cylinder Head)",make:"Toyota",model:"Toyota Corolla 1.6",price:6500,qty:1,img:"https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&q=80",cond:"Used - Good Condition",active:1,note:"Needs cleaning before collection - cleaned on order"},
-  ];
-  localStorage.setItem('tahor_parts', JSON.stringify(parts));
-}
+if(!parts){parts=[{name:"1.6 Corolla Block",make:"Toyota",model:"Toyota Corolla 1.6",price:8500,qty:3,img:"https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80",cond:"Used - Good Condition",active:1,note:"Needs cleaning before collection - cleaned on order"},{name:"1.6 Corolla Top (Cylinder Head)",make:"Toyota",model:"Toyota Corolla 1.6",price:6500,qty:1,img:"https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=600&q=80",cond:"Used - Good Condition",active:1,note:"Needs cleaning before collection - cleaned on order"}];localStorage.setItem('tahor_parts', JSON.stringify(parts));}
 let currentCat='all';
 function saveParts(){ localStorage.setItem('tahor_parts', JSON.stringify(parts)); }
-
 function renderMain(){
-  let grid=document.getElementById('mainGrid');
-  if(!grid) return;
+  let grid=document.getElementById('mainGrid'); if(!grid) return;
   grid.innerHTML=businesses.map(b=>{
-    if(b.name==='TAKEALOT'){
-      return `<div class="card"><img src="${b.img}" onclick="openTakealot()" style="cursor:pointer"><div class="card-body"><span class="badge">RETAIL • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="openTakealot()">Shop Now & Earn Points →</a></div></div>`;
-    }
+    if(b.name==='TAKEALOT'){return `<div class="card"><img src="${b.img}" onclick="openTakealot()" style="cursor:pointer"><div class="card-body"><span class="badge">RETAIL • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="openTakealot()">Shop Now & Earn Points →</a></div></div>`;}
+    if(b.isJJ){return `<div class="card"><img src="${b.img}"><div class="gallery"><img src="${b.gallery[1]}"><img src="${b.gallery[2]}"></div><div class="card-body"><span class="badge">SERVICES • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="setCat('services',document.querySelector('.cat.services'))">Open JJ TEAM App →</a></div></div>`;}
     return `<div class="card"><img src="${b.img}">${b.gallery?`<div class="gallery"><img src="${b.gallery[0]}"><img src="${b.gallery[1]}"></div>`:''}<div class="card-body"><span class="badge ${b.cat==='bookstore'?'book':''}">${b.cat.toUpperCase()} • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p>${b.isBookstore?`<a class="btn book" onclick="openBookstore()">📚 Open Bookstore →</a>`:`<a href="${b.link||'#'}" class="btn" target="_blank" rel="noopener">View Details →</a>`}</div></div>`;
   }).join('');
 }
 function render(){
   let q=document.getElementById('searchInput').value.toLowerCase();
-  let grid=document.getElementById('businessGrid');
-  if(!grid) return;
-  let filterBar=document.getElementById('partsFilterBar');
-  if(filterBar) filterBar.style.display = currentCat==='carparts' ? 'flex' : 'none';
+  let grid=document.getElementById('businessGrid'); if(!grid) return;
+  let filterBar=document.getElementById('partsFilterBar'); if(filterBar) filterBar.style.display = currentCat==='carparts' ? 'flex' : 'none';
+  document.getElementById('jjInside').style.display = currentCat==='services' ? 'block' : 'none';
   if(currentCat==='carparts'){
     let make=document.getElementById('makeFilter').value;
     let activeParts=parts.filter(p=>p.active==1 && (make==='ALL'||p.make===make) && (p.name.toLowerCase().includes(q)||p.model.toLowerCase().includes(q)));
     if(activeParts.length===0){ grid.innerHTML='<p style="text-align:center;padding:30px;background:#fff;border-radius:12px">No parts available right now.<br><small>Check back later — new parts coming soon.</small></p>'; return; }
-    grid.innerHTML=activeParts.map(p=>{
-      let realIdx=parts.indexOf(p);
-      return `<div class="card"><img src="${p.img}" onerror="this.src='https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80'"><div class="card-body"><span class="badge parts">USED CAR PART • ${p.make} • ${p.cond}</span><h3>${p.name}</h3><div class="stars">⭐⭐⭐⭐⭐ 4.8 ★</div><p>🚗 Car: ${p.model}<br>📍 Musina Ext 14<br>Condition: ${p.cond}<br>🧹 ${p.note||''}<br>📦 Qty: <b>${p.qty} in stock</b></p><p style="font-size:22px;font-weight:900;color:#0B3A6B">R${p.price.toLocaleString()}</p><a class="btn" style="background:#25D366;color:#fff;border-color:#25D366" href="https://wa.me/27799073779?text=Hi%20TAHOR!%20I%20want%20${encodeURIComponent(p.name)}%20R${p.price}" target="_blank">💬 WhatsApp to Order</a>${isEditor ? `<button class="btn" onclick="editPrice(${realIdx})">✏️ Edit Price - R${p.price}</button><button class="btn" onclick="editQty(${realIdx})">✏️ Edit Qty - ${p.qty} left</button><button class="btn" onclick="toggleActive(${realIdx})">Hide / Not Active</button>` : ''}</div></div>`;
-    }).join(''); return;
+    grid.innerHTML=activeParts.map(p=>{let realIdx=parts.indexOf(p);return `<div class="card"><img src="${p.img}" onerror="this.src='https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80'"><div class="card-body"><span class="badge parts">USED CAR PART • ${p.make} • ${p.cond}</span><h3>${p.name}</h3><div class="stars">⭐⭐⭐⭐⭐ 4.8 ★</div><p>🚗 Car: ${p.model}<br>📍 Musina Ext 14<br>Condition: ${p.cond}<br>🧹 ${p.note||''}<br>📦 Qty: <b>${p.qty} in stock</b></p><p style="font-size:22px;font-weight:900;color:#0B3A6B">R${p.price.toLocaleString()}</p><a class="btn" style="background:#25D366;color:#fff;border-color:#25D366" href="https://wa.me/27799073779?text=Hi%20TAHOR!%20I%20want%20${encodeURIComponent(p.name)}%20R${p.price}" target="_blank">💬 WhatsApp to Order</a>${isEditor ? `<button class="btn" onclick="editPrice(${realIdx})">✏️ Edit Price - R${p.price}</button><button class="btn" onclick="editQty(${realIdx})">✏️ Edit Qty - ${p.qty} left</button><button class="btn" onclick="toggleActive(${realIdx})">Hide / Not Active</button>` : ''}</div></div>`;}).join(''); return;
   }
   let filtered=businesses.filter(b=>(currentCat==='all'||b.cat===currentCat) && (b.name.toLowerCase().includes(q)||b.desc.toLowerCase().includes(q)));
   grid.innerHTML=filtered.map(b=>{
-    if(b.name==='TAKEALOT'){
-      return `<div class="card"><img src="${b.img}" onclick="openTakealot()" style="cursor:pointer"><div class="card-body"><span class="badge">RETAIL • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="openTakealot()">Shop Now & Earn Points →</a><a class="btn" href="https://www.takealot.com" target="_blank" rel="noopener" style="margin-top:8px;background:#0A4A8C;color:#fff;border-color:#0A4A8C">Visit Takealot.com ↗</a></div></div>`;
-    }
+    if(b.name==='TAKEALOT'){return `<div class="card"><img src="${b.img}" onclick="openTakealot()" style="cursor:pointer"><div class="card-body"><span class="badge">RETAIL • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="openTakealot()">Shop Now & Earn Points →</a><a class="btn" href="https://www.takealot.com" target="_blank" rel="noopener" style="margin-top:8px;background:#0A4A8C;color:#fff;border-color:#0A4A8C">Visit Takealot.com ↗</a></div></div>`;}
+    if(b.isJJ){return `<div class="card"><img src="${b.img}"><div class="gallery"><img src="${b.gallery[1]}"><img src="${b.gallery[2]}"></div><div class="card-body"><span class="badge">SERVICES • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p><a class="btn" onclick="document.getElementById('jjInside').scrollIntoView({behavior:'smooth'})">Open JJ TEAM App →</a></div></div>`;}
     return `<div class="card"><img src="${b.img}">${b.gallery?`<div class="gallery"><img src="${b.gallery[0]}"><img src="${b.gallery[1]}"></div>`:''}<div class="card-body"><span class="badge ${b.cat==='bookstore'?'book':''}">${b.cat.toUpperCase()} • ${b.type}</span><h3>${b.name}</h3><div class="stars">⭐⭐⭐⭐⭐ ${b.rating}</div><p>🕒 ${b.open}<br>📍 ${b.loc}<br>${b.desc}</p>${b.isBookstore?`<a class="btn book" onclick="openBookstore()">📚 Open Bookstore →</a>`:`<a href="${b.link||'#'}" class="btn" target="_blank" rel="noopener">View Details →</a>`}</div></div>`;
   }).join('') || '<p style="text-align:center">No businesses found. Try another search.</p>';
 }
-function setCat(cat,el){
-  currentCat=cat;
-  document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));
-  if(el) el.classList.add('active');
-  // GO INSIDE
-  document.getElementById('mainPage').style.display='none';
-  document.getElementById('insidePage').style.display='block';
-  document.getElementById('insideTitle').innerText = el ? el.innerText + ' — Inside TAHOR' : 'Inside TAHOR';
-  render();
-  window.scrollTo(0,0);
-}
-function goBackHome(){
-  document.getElementById('mainPage').style.display='block';
-  document.getElementById('insidePage').style.display='none';
-  document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));
-  currentCat='all';
-  renderMain();
-  window.scrollTo(0,0);
-}
-function togglePartsAdmin(){
-  if(!isEditor){
-    let pin = prompt("Editor Only - Enter PIN (Owner Only):");
-    if(pin !== ADMIN_PIN){ alert("Wrong PIN - Only TAHOR owner can edit"); return; }
-    isEditor = true; alert("Welcome boss - You are now Editor. You can edit prices.");
-  }
-  let p=document.getElementById('partsAdmin');
-  p.style.display=p.style.display==='none'?'block':'none';
-  render();
-}
-function addPart(){
-  if(!isEditor) return alert("Only editor can add");
-  let n=document.getElementById('pName').value, mk=document.getElementById('pMake').value, mo=document.getElementById('pModel').value, pr=document.getElementById('pPrice').value, qty=document.getElementById('pQty').value, img=document.getElementById('pImg').value, cond=document.getElementById('pCond').value, act=document.getElementById('pActive').value;
-  if(!n || !pr) return alert('Please enter Part Name and Price');
-  parts.push({name:n,make:mk,model:mo,price:parseFloat(pr),qty:parseInt(qty)||1,img:img||'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80',cond:cond,active:parseInt(act),note:"Needs cleaning before collection - cleaned on order"});
-  saveParts(); render();
-  document.getElementById('pName').value=''; document.getElementById('pPrice').value='';
-  alert('Part saved! It shows only if ACTIVE.');
-}
+function setCat(cat,el){currentCat=cat;document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));if(el) el.classList.add('active');document.getElementById('mainPage').style.display='none';document.getElementById('insidePage').style.display='block';document.getElementById('insideTitle').innerText = el ? el.innerText + ' — Inside TAHOR' : 'Inside TAHOR';render();window.scrollTo(0,0);}
+function goBackHome(){document.getElementById('mainPage').style.display='block';document.getElementById('insidePage').style.display='none';document.querySelectorAll('.cat').forEach(c=>c.classList.remove('active'));currentCat='all';renderMain();window.scrollTo(0,0);}
+function togglePartsAdmin(){if(!isEditor){let pin = prompt("Editor Only - Enter PIN (Owner Only):");if(pin !== ADMIN_PIN){ alert("Wrong PIN - Only TAHOR owner can edit"); return; }isEditor = true; alert("Welcome boss - You are now Editor. You can edit prices.");}let p=document.getElementById('partsAdmin');p.style.display=p.style.display==='none'?'block':'none';render();}
+function addPart(){if(!isEditor) return alert("Only editor can add");let n=document.getElementById('pName').value, mk=document.getElementById('pMake').value, mo=document.getElementById('pModel').value, pr=document.getElementById('pPrice').value, qty=document.getElementById('pQty').value, img=document.getElementById('pImg').value, cond=document.getElementById('pCond').value, act=document.getElementById('pActive').value;if(!n || !pr) return alert('Please enter Part Name and Price');parts.push({name:n,make:mk,model:mo,price:parseFloat(pr),qty:parseInt(qty)||1,img:img||'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=80',cond:cond,active:parseInt(act),note:"Needs cleaning before collection - cleaned on order"});saveParts(); render();document.getElementById('pName').value=''; document.getElementById('pPrice').value='';alert('Part saved! It shows only if ACTIVE.');}
 function toggleActive(idx){ parts[idx].active = parts[idx].active ? 0 : 1; saveParts(); render(); }
-function editPrice(idx){
-  if(!isEditor) return alert("Only editor can edit price");
-  let newPrice = prompt("New price for " + parts[idx].name + " (Current R" + parts[idx].price + "):", parts[idx].price);
-  if(newPrice && !isNaN(newPrice)){ parts[idx].price = parseFloat(newPrice); saveParts(); render(); alert("Price updated to R" + newPrice); }
-}
-function editQty(idx){
-  if(!isEditor) return;
-  let newQty = prompt("How many " + parts[idx].name + " do you have now?", parts[idx].qty);
-  if(newQty !== null){ parts[idx].qty = parseInt(newQty); if(parts[idx].qty <= 0) parts[idx].active = 0; saveParts(); render(); }
-}
+function editPrice(idx){if(!isEditor) return alert("Only editor can edit price");let newPrice = prompt("New price for " + parts[idx].name + " (Current R" + parts[idx].price + "):", parts[idx].price);if(newPrice && !isNaN(newPrice)){ parts[idx].price = parseFloat(newPrice); saveParts(); render(); alert("Price updated to R" + newPrice); }}
+function editQty(idx){if(!isEditor) return;let newQty = prompt("How many " + parts[idx].name + " do you have now?", parts[idx].qty);if(newQty !== null){ parts[idx].qty = parseInt(newQty); if(parts[idx].qty <= 0) parts[idx].active = 0; saveParts(); render(); }}
 function filterBusinesses(){ if(document.getElementById('insidePage').style.display==='block'){render();} else {renderMain();} }
 function openBookstore(){document.getElementById('bookModal').classList.add('open');document.body.style.overflow='hidden';}
 function closeBookstore(){document.getElementById('bookModal').classList.remove('open');document.body.style.overflow='auto';}
 function openTakealot(){document.getElementById('takealotModal').classList.add('open');document.body.style.overflow='hidden';}
 function closeTakealot(){document.getElementById('takealotModal').classList.remove('open');document.body.style.overflow='auto';}
 function selectPlan(p){document.getElementById('bPlan').value=p;document.getElementById('add').scrollIntoView({behavior:'smooth'});alert('You selected '+p+' — fill the form to join!');}
-function addBusiness(){
-  let name=document.getElementById('bName').value,desc=document.getElementById('bDesc').value,loc=document.getElementById('bLoc').value,cat=document.getElementById('bCat').value;
-  if(!name){alert('Please enter business name');return;}
-  businesses.push({name,cat,rating:"New",type:"Local Business",loc:loc||"Musina",desc:desc||"New business in Musina",img:"https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80",open:"Open now"});
-  renderMain();document.getElementById('msg').innerText='✅ '+name+' added successfully! It now appears on the platform.';
-  document.getElementById('bName').value='';
-}
-renderMain();
-render();
-let pages=[
-  {img:"pic5.jpg",title:"Cover — Passion Over Laziness",text:"By TAHOR Kids • Age 5-10 • English<br>Passion is doing what you love, even when it's hard. Laziness is waiting for tomorrow."},
-  {img:"pic6.jpg",title:"Page 1 — Meet TAHOR",text:"TAHOR is a bright, happy kid in Musina. He loves reading, running and helping his mom. He wakes up early and says: 'Today I will do my best!'"},
-  {img:"pic7.jpg",title:"Page 2 — Passion vs Laziness",text:"One day, Laziness says: 'Sleep more, don't read.' Passion says: 'Get up, let's learn, let's grow!' TAHOR chooses Passion."},
-  {img:"pic8.jpg",title:"Page 3 — TAHOR Tries Hard",text:"TAHOR reads one page, then two, then a whole book! He helps his friends. He feels proud because he did not give up."},
-  {img:"pic9.jpg",title:"Page 4 — Passion Wins",text:"When you choose passion, you grow big and strong. Laziness makes you small. TAHOR says: 'Passion over laziness, always!'"},
-  {img:"pic9.jpg",title:"Page 5 — The End",text:"Testing Only — Page 5. This is the end of our test book. More books coming soon to Shelf 1!"},
-];
+function addBusiness(){let name=document.getElementById('bName').value,desc=document.getElementById('bDesc').value,loc=document.getElementById('bLoc').value,cat=document.getElementById('bCat').value;if(!name){alert('Please enter business name');return;}businesses.push({name,cat,rating:"New",type:"Local Business",loc:loc||"Musina",desc:desc||"New business in Musina",img:"https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80",open:"Open now"});renderMain();document.getElementById('msg').innerText='✅ '+name+' added successfully! It now appears on the platform.';document.getElementById('bName').value='';}
+renderMain();render();
+let pages=[{img:"pic5.jpg",title:"Cover — Passion Over Laziness",text:"By TAHOR Kids • Age 5-10 • English<br>Passion is doing what you love, even when it's hard. Laziness is waiting for tomorrow."},{img:"pic6.jpg",title:"Page 1 — Meet TAHOR",text:"TAHOR is a bright, happy kid in Musina. He loves reading, running and helping his mom. He wakes up early and says: 'Today I will do my best!'"},{img:"pic7.jpg",title:"Page 2 — Passion vs Laziness",text:"One day, Laziness says: 'Sleep more, don't read.' Passion says: 'Get up, let's learn, let's grow!' TAHOR chooses Passion."},{img:"pic8.jpg",title:"Page 3 — TAHOR Tries Hard",text:"TAHOR reads one page, then two, then a whole book! He helps his friends. He feels proud because he did not give up."},{img:"pic9.jpg",title:"Page 4 — Passion Wins",text:"When you choose passion, you grow big and strong. Laziness makes you small. TAHOR says: 'Passion over laziness, always!'"},{img:"pic9.jpg",title:"Page 5 — The End",text:"Testing Only — Page 5. This is the end of our test book. More books coming soon to Shelf 1!"}];
 let currentPage=0;
 function openBook(){ currentPage=0; showPage(); document.getElementById('readerModal').classList.add('open'); }
 function closeBook(){document.getElementById('readerModal').classList.remove('open');}
-function showPage(){
-  let p=pages[currentPage];
-  document.getElementById('readerImg').src=p.img;
-  document.getElementById('readerTitle').innerText=p.title;
-  document.getElementById('readerText').innerHTML=p.text;
-  document.getElementById('readerPageLabel').innerText=(currentPage===0?'Cover — Page 1 of 6':'Page '+(currentPage+1)+' of 6');
-  document.getElementById('prevBtn').disabled = currentPage===0;
-}
+function showPage(){let p=pages[currentPage];document.getElementById('readerImg').src=p.img;document.getElementById('readerTitle').innerText=p.title;document.getElementById('readerText').innerHTML=p.text;document.getElementById('readerPageLabel').innerText=(currentPage===0?'Cover — Page 1 of 6':'Page '+(currentPage+1)+' of 6');document.getElementById('prevBtn').disabled = currentPage===0;}
 function nextPage(){ if(currentPage < pages.length-1){currentPage++; showPage();} }
 function prevPage(){ if(currentPage > 0){currentPage--; showPage();} }
 const textToType = "All businesses in one pot";
-let charIndex = 0;
-let isDeleting = false;
-function typeEffect(){
-  const el = document.getElementById('typingText');
-  if(!el) return;
-  if(!isDeleting){
-    charIndex++;
-    el.textContent = textToType.substring(0, charIndex);
-    if(charIndex === textToType.length){ isDeleting = true; setTimeout(typeEffect, 1200); return; }
-    setTimeout(typeEffect, 220);
-  } else {
-    charIndex--;
-    el.textContent = textToType.substring(0, charIndex);
-    if(charIndex === 0){ isDeleting = false; setTimeout(typeEffect, 0); return; }
-    setTimeout(typeEffect, 60);
-  }
-}
+let charIndex = 0; let isDeleting = false;
+function typeEffect(){const el = document.getElementById('typingText');if(!el) return;if(!isDeleting){charIndex++;el.textContent = textToType.substring(0, charIndex);if(charIndex === textToType.length){ isDeleting = true; setTimeout(typeEffect, 1200); return; }setTimeout(typeEffect, 220);} else {charIndex--;el.textContent = textToType.substring(0, charIndex);if(charIndex === 0){ isDeleting = false; setTimeout(typeEffect, 0); return; }setTimeout(typeEffect, 60);}}
 typeEffect();
+// JJ TEAM LOGIC - 1 room at a time, Sundays blocked
+let jjSelected={};
+function jjBack(){document.querySelectorAll('.jj-room').forEach(r=>r.classList.remove('active'));document.getElementById('jjHome').style.display='grid'}
+function jjOpen(id){document.getElementById('jjHome').style.display='none';document.querySelectorAll('.jj-room').forEach(r=>r.classList.remove('active'));document.getElementById('jj-'+id).classList.add('active')}
+function jjBuild(id){
+ let el=document.getElementById('cal-'+id);let today=new Date();let html='<label style="font-size:11px;color:#94a3b8">Select Date - Sundays Closed</label><div class="jj-cal"><b>Su</b><b>Mo</b><b>Tu</b><b>We</b><b>Th</b><b>Fr</b><b>Sa</b>';
+ for(let i=0;i<30;i++){let d=new Date(today);d.setDate(today.getDate()+i);let isSun=d.getDay()===0;html+=`<div class="jj-day ${isSun?'dis':''}" onclick="${isSun?'':'jjSelect(this,\''+id+'\')'}">${d.getDate()}/${d.getMonth()+1}</div>`}
+ html+='</div>';el.innerHTML=html;
+}
+function jjSelect(el,id){document.querySelectorAll('#cal-'+id+' .jj-day').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');jjSelected[id]=el.innerText}
+jjBuild('jojo');jjBuild('garden');jjBuild('spring');
+function jjBook(s,id){let n=document.getElementById('n-'+id).value;let d=jjSelected[id]||'No date';if(!n){alert('Please fill Name');return}window.open('https://wa.me/27763574601?text='+encodeURIComponent('Hi JJ TEAM, I want '+s+' on '+d+' Name: '+n),'_blank')}
+function jjPay(s){alert(s+' - Online Payment: PayFast / Yoco / Card - R450 for Spring');window.open('https://wa.me/27763574601?text='+encodeURIComponent('I want to pay online for '+s),'_blank')}
 </script>
 </body>
 </html>
